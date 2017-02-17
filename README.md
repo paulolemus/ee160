@@ -6,15 +6,14 @@ A repo for group projects and homework
 Hey guys. We are going to use this folder to share our code for the rest of the labs and homework assignments. Using git may be a little confusing at first but it is worth getting used to. Here are instructions on how to get set up.
 
 1. Create a GitHub account, and then email it to be so I can give you permission to push to this repository.
-2. You will need to clone this repository into your workspace by doing the following.
 
-2a. Go to the webpage that contains the repo on GitHub. Click on the green "Clone or download" button. Check that above the link it says "Clone with HTTPS". Copy the link.
+2. Go to the webpage that contains the repo on GitHub. Click on the green "Clone or download" button. Check that above the link it says "Clone with HTTPS". Copy the link.
 
-2b. cd in to your ee160 folder. Type `git clone ` and then paste the link into the terminal. You can paste in terminal with Ctrl-LShift-V.
+3. cd in to your ee160 folder. Type `git clone ` and then paste the link into the terminal. You can paste in terminal with Ctrl-LShift-V.
 
-2c. Rename the folder to ee160-shared. `mv ee160/ ee160-shared/`.
+4. Rename the folder to ee160-shared. `mv ee160/ ee160-shared/`.
 
-3. cd into the downloaded folder. type `git config --global push.default simple`
+5. cd into the downloaded folder. type `git config --global push.default simple`
 
 # Using git
 
