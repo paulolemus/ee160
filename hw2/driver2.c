@@ -15,12 +15,12 @@ int main()
 {
         int month, year;
         
-        printf("Starting Days in a Month Program...");
+        printf("Starting Days in a Month Program..\n.");
         printf("Enter a month and a year (mm yy): ");
 
         while (scanf("%d %d", &month, &year) != EOF)
         {
-                printf("There are %d days in that month.", days_in_month(month, year));
+                printf("There are %d days in that month\n", days_in_month(month, year));
                 printf("Enter a month and a year (mm yy): ");
         }
         return (printf("Goodbye!\n"));
