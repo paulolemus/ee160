@@ -8,6 +8,8 @@
 /*      Function Definiton to get numbers of days in that month */
 
 #include "days.h"
+#define TRUE 1
+#define FALSE 0
 
 int days_in_month(int month, int year)
 {
