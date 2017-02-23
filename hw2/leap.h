@@ -10,7 +10,9 @@
 #define HW2_LEAP_H_
 
 /* Given: a year
-   Returns: TRUE is year is a leap year, FALSE otherwise
+ * Returns: TRUE is year is a leap year, FALSE otherwise
+ *
+ * Status: FINISHED
  */
 int is_leap(int year);
 
