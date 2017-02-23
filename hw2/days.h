@@ -1,17 +1,13 @@
-/*	file   : days.h
- *	by     : Paulo Lemus
- *	login  : Plemus
- *	date   : 2/17/2017
- *	team   : AMERICA
- *	members: Paulo Lemus, Kevin Liu, Christopher Amedola
- */
+//      File:   days.h
+//      By:     Kevin Liu
+//      login:  liukevin
+//      Team:   AMERICA
+//      Members:Paulo, Christopher
 
-#ifndef HW2_DAYS_H_
-#define HW2_DAYS_H_
+/*      Function Prototype to check the number of days in that month    */
 
-/* Given: a month and year year
-   Returns: the number of days in that month.
- */
-int days_in_month(int month, int year)
+#include "leap.h"
 
-#endif
+int days_in_month(int month, int year);
+/*      Given: month and year
+ *      Returns: number of days in that month   */

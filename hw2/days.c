@@ -1,31 +1,38 @@
+//      File:   days.c
+//      By:     Kevin Liu
+//      login:  liukevin
+//      Team:   AMERICA
+//      Members:Paulo, Christopher
+//      Date:   02/21/17
 
-/*	file   : days.c
- *	by     : 
- *	login  : 
- *	date   : 2/17/2017
- *	team   : AMERICA
- *	members: Paulo Lemus, Kevin Liu, Christopher Amedola
- */
+/*      Function Definiton to get numbers of days in that month */
 
 #include "days.h"
 
 int days_in_month(int month, int year)
-/* Given: a month and year year
-   Returns: the number of days in that month.
- */
-{  
-/* this the stub version of days_in_month().  it just
-	always returns the same answer, 30  */
- 
-	#ifdef DEBUG
-	printf("debug:Enter days_in_month: month = %d, year = %d\n",
-		month, year);
-	#endif
-
-	#ifdef DEBUG
-	printf("debug:Exit days_in_month: stub says 30\n");
-	#endif
-
-	return 30;
+{
+        if (month <= 7) //when months July and before 
+        {
+                if (month % 2 != 0) //if odd months (Jan, Mar, May, July)
+                        return 31;
+                else //if even months (Feb, Apr, June)
+                {
+                        if (month == 2) //February
+                        {
+                                if (is_leap(year) == TRUE)
+                                        return 29;
+                                else
+                                        return 28;
+                        }
+                        else //April & June
+                                return 30;
+                }
+        }
+        else //months after July
+        {
+                if (month % 2 != 0) //if odd months (Sept, Nov)
+                        return 30;
+                else //if even months (Aug, Oct, Dec)
+                        return 31;
+        }
 }
-
