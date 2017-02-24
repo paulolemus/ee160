@@ -1,31 +1,21 @@
 
 /*	file   : julian.c
- *	by     :
- *	login  :
- *	date   : 2/17/2017
+ *	by     : Paulo Lemus
+ *	login  : Plemus
+ *	date   : 2/23/2017
  *	team   : AMERICA
  *	members: Paulo Lemus, Kevin Liu, Christopher Amadola
  */
 
 #include "julian.h"
+#include "days.h"
 
-int julian_date(int day, int month, int year)
-/* Given: a day, month and year year
-   Returns: the julian date for that day.
+/* This function returns the cardinal day of the month.
+ * This uses the days_in_month function 
+ *
+ *
  */
-{  
-/* this the stub version of julian_date().  it just
-	always returns the same answer, 31 (31 Jan of any year)  */
- 
-	#ifdef DEBUG
-	printf("debug:Enter julian_date: day = %d, month = %d, year = %d\n",
-		day, month, year);
-	#endif
+int julian_date(int day, int month, int year){  
 
-	#ifdef DEBUG
-	printf("debug:Exit julian_date: stub says 31\n");
-	#endif
 
-	return 31;
 }
-

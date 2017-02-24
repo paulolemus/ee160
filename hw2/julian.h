@@ -10,10 +10,10 @@
 #ifndef HW2_JULIAN_H_
 #define HW2_JULIAN_H_
 
-/* Given: a day, month and year year
+/* Given: a day, month, and year
    Returns: the julian date for that day.
  */
-int julian_date(int day, int month, int year)
+int julian_date(int day, int month, int year);
 
 
 #endif
