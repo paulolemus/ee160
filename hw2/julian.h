@@ -1,4 +1,3 @@
-
 /*	file   : julian.h
  *	by     : Paulo Lemus
  *	login  : Plemus

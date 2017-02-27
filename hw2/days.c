@@ -20,5 +20,8 @@ int days_in_month(int month, int year){
     if(month % 2 != 0 && month > 7) days = 30;
     if(month % 2 == 0 && month > 7) days = 31;
     if(month == 2) days = 28 + is_leap(year);
+
+    // Check bounds
+    if(month > 12) return -1;
     return days;
 }

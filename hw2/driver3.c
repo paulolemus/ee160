@@ -37,7 +37,7 @@ int main(){
                julian_date(day, month, year));
 
         while(getchar() != '\n');
-        printf("Enter a month, day, and year (mm dd yyyy): ");
+        printf("\n\nEnter a month, day, and year (mm dd yyyy): ");
     }
 
     printf("\nGoodbye!\n\n");
