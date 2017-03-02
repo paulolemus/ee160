@@ -1,9 +1,9 @@
 /*	file   : leap.h
- *	by     : Paulo Lemus
- *	login  : plemus
- *	date   : 2/17/2017
+ *	by     : Chris Camendola
+ *	login  : camendol
+ *	date   : 3/1/2017
  *	team   : AMERICA
- *	members: Paulo Lemus, Kevin Liu, Christopher Amedola
+ *	members: Paulo Lemus, Kevin Liu, Christopher Amendola
  */
 
 #ifndef HW2_LEAP_H_

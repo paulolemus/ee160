@@ -3,7 +3,7 @@
  *	login  : plemus
  *	date   : 2/17/2017
  *	team   : AMERICA
- *	members: Paulo Lemus, Kevin Liu, Christopher Amedola
+ *	members: Paulo Lemus, Kevin Liu, Christopher Amendola
  */
 
 /* A program to test the validity of int julian_date function.

@@ -2,7 +2,8 @@
  * By     : Kevin Liu
  * login  : liukevin
  * Team   : AMERICA
- * Members: Paulo, Christopher
+ * Date: 3/2/2017
+ * Members: Paulo, Christopher, Kevin
  */
 
 /* Function Prototype to check the number of days in that month

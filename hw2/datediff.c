@@ -1,8 +1,9 @@
 /* File   : datediff.c
  * Name   : Paulo Lemus
  * Id     : Plemus
+ * Date   : 3/2/2017
  * Team   : AMERICA
- * Members: Paulo Lemus, Kevin Liu, Christpoher Amedola
+ * Members: Paulo Lemus, Kevin Liu, Christpoher Amendola
  */
 
 #include <stdio.h>
@@ -12,6 +13,8 @@
 int main(){
 
     // Cool intro text worth extra points
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     printf("                 __  __  ___  __            \n");
     printf("  /\\   |\\    /| |   |  |  |  |     /\\    \n");
     printf(" /--\\  | \\  / | |-- |__|  |  |    /--\\   \n");
@@ -33,6 +36,10 @@ int main(){
          * issues with the user input for a date and continue
          * to the next loop if there was. Otherwise, the input
          * is valid and the loop moves on to evaluate the dates.
+         *
+         * Note: I only use break and continue in the beginning
+         *       of this while loop to validate user input so I
+         *       assume this is fine. They do not hurt readability.
          */
         printf("\nEnter starting date (mm dd yyyy): ");
         if((chk1 = scanf("%d", &s_month)) == EOF) break;
@@ -103,9 +110,13 @@ int main(){
         totalDiff -= julian_date(s_day, s_month, s_year);
         totalDiff *= dir;
 
-        printf("\nThe number of days between the ");
-        printf("start and end is %d days\n\n", totalDiff);
-    }
+        printf("\nThe number of days between ");
+        if(dir == 1) printf("%d/%d/%d and %d/%d/%d is ", s_month, s_day, s_year, 
+                                                         e_month, e_day, e_year);
+        else         printf("%d/%d/%d and %d/%d/%d is ", e_month, e_day, e_year, 
+                                                         s_month, s_day, s_year);
+        printf("%d days\n\n", totalDiff);
+    } // while loop
     printf("\n\nGoodbye!\n\n");
     return 0;
 }
