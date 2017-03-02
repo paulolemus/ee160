@@ -12,6 +12,7 @@
  */
 
 #include "days.h"
+#include "leap.h"
 
 int days_in_month(int month, int year){
     int days = 0;
