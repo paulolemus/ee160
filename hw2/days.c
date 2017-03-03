@@ -7,22 +7,19 @@
 
 /*      Function Definiton to get numbers of days in that month */
 
-#include "leap.h"
 #include "days.h"
-#define TRUE 1
-#define FALSE 0
 
 int days_in_month(int month, int year)
 {
-        if(month <= 7) //when months July and before 
+        if (month <= 7 && month > 0) //when months July and before 
         {
-                if(month % 2 != 0) //if odd months (Jan, Mar, May, July)
+                if (month % 2 != 0) //if odd months (Jan, Mar, May, July)
                         return 31;
                 else //if even months (Feb, Apr, June)
                 {
-                        if(month == 2) //February
+                        if (month == 2) //February
                         {
-                                if(is_leap(year) == TRUE)
+                                if (is_leap(year))
                                         return 29;
                                 else
                                         return 28;
@@ -31,11 +28,13 @@ int days_in_month(int month, int year)
                                 return 30;
                 }
         }
-        else //months after July
+        else if(month >= 7) //months after July
         {
-                if(month % 2 != 0) //if odd months (Sept, Nov)
+                if (month % 2 != 0) //if odd months (Sept, Nov)
                         return 30;
                 else //if even months (Aug, Oct, Dec)
                         return 31;
         }
+        else
+                return 0;
 }

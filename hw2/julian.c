@@ -1,31 +1,26 @@
+/*     File:    julian.c
+ *     By:      Kevin Liu
+ *     login:   liukevin
+ *     Date:    03/03/17
+ *     Team:    AMERICAC
+ *     Members: Paulo, Christopher, Kevin  */
 
-/*	file   : julian.c
- *	by     :
- *	login  :
- *	date   : 2/17/2017
- *	team   : AMERICA
- *	members: Paulo Lemus, Kevin Liu, Christopher Amadola
- */
+/*  function to compute julian date from days, months, and years  */
 
 #include "julian.h"
 
 int julian_date(int day, int month, int year)
-/* Given: a day, month and year year
-   Returns: the julian date for that day.
- */
-{  
-/* this the stub version of julian_date().  it just
-	always returns the same answer, 31 (31 Jan of any year)  */
- 
-	#ifdef DEBUG
-	printf("debug:Enter julian_date: day = %d, month = %d, year = %d\n",
-		day, month, year);
-	#endif
+{
+        int julian;
 
-	#ifdef DEBUG
-	printf("debug:Exit julian_date: stub says 31\n");
-	#endif
+        /*  add all the days in previous month(s)  */
+        while(month > 0)
+        {
+                month--; //get previous month
+                julian += days_in_month(month, year); //get days in previous month
+        }
+        /*  add current days passed to julian number  */
+        julian += day;
 
-	return 31;
+        return julian;
 }
-

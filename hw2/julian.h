@@ -1,19 +1,14 @@
+/*      File:   julian.h
+        By:     Kevin Liu
+        Date:   03/03/17
+        Team:   AMERICA
+        Members:Paulo, Christopher, Kevin  */
 
-/*	file   : julian.h
- *	by     : Paulo Lemus
- *	login  : Plemus
- *	date   : 2/17/2017
- *	team   : AMERICA
- *	members: Paulo Lemus, Kevin Liu, Christopher Amadola
- */
+/*  function declaration for julian date  */
 
-#ifndef HW2_JULIAN_H_
-#define HW2_JULIAN_H_
+#include "days.h"
 
-/* Given: a day, month and year year
-   Returns: the julian date for that day.
- */
-int julian_date(int day, int month, int year)
-
-
-#endif
+int julian_date(int day, int month, int year);
+/*      Given: Day, Month, & Year
+ *      computes the julian date
+ *      Return: julian date integer  */
