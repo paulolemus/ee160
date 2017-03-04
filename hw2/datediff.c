@@ -7,7 +7,62 @@
  */
 
 #include <stdio.h>
+#include "datediff.h"
 #include "julian.h"
+
+
+/* Algorithm:
+ * 1. Determine which date is greater.
+ *    If the end date is less than start, swap the dates
+ *    and remember they are swapped.
+ * 2. Add up each year's total number of days
+ * 3. For start, remove the days between the start and 
+ *    the beginning of the year.
+ * 4. For end, remove the days between the end date and
+ *    the end of the year.
+ * 5. If the dates were swapped, make the diff negative.
+ *
+ * Note: This will return a negative number of days if
+ *       start date > end date. This is intentional.
+ */
+int dateDifference(int sday, int smonth, int syear, int eday, int emonth, int eyear){
+    int totalDiff = 0;
+    int dir;
+    int i;
+
+
+    // determine which date is greater
+    dir = (eyear >= syear) ? 1 : -1;
+    if(eyear == syear){
+        dir = (julian_date(eday, emonth, eyear) >= 
+               julian_date(sday, smonth, syear)) ? 1 : -1;
+    }
+    // If start > end, swap the dates for calculation
+    if(dir == -1){
+        int temp1, temp2, temp3;
+        temp1  = syear;
+        temp2  = smonth;
+        temp3  = sday;
+        syear  = eyear;
+        eyear  = temp1;
+        smonth = emonth;
+        emonth = temp2;
+        sday   = eday;
+        eday   = temp3;
+    }
+
+    // sum up each year's total # of days
+    for(i = syear; i <= eyear; i++){
+        totalDiff += julian_date(31, 12, i);
+    }
+    // remove the difference from start to beginning of year and
+    // from end to end of year.
+    totalDiff -= julian_date(31, 12, eyear) - julian_date(eday, emonth, eyear);
+    totalDiff -= julian_date(sday, smonth, syear);
+    totalDiff *= dir;
+
+    return totalDiff;
+}
 
 
 int main(){
@@ -28,6 +83,7 @@ int main(){
         int s_day, s_month, s_year;
         int e_day, e_month, e_year;
         int chk1, chk2, chk3, chk4, chk5, chk6;
+        int totalDiff;
 
         /* Get user input and check for invalids.
          * Code is written so if the user enters EOF
@@ -39,7 +95,8 @@ int main(){
          *
          * Note: I only use break and continue in the beginning
          *       of this while loop to validate user input so I
-         *       assume this is fine. They do not hurt readability.
+         *       assume this is fine. They do not hurt readability,
+         *       nor are they nested deep in a loop.
          */
         printf("\nEnter starting date (mm dd yyyy): ");
         if((chk1 = scanf("%d", &s_month)) == EOF) break;
@@ -61,62 +118,29 @@ int main(){
             continue;
         }
 
+        /* Check for invalid dates */
+        if(julian_date(s_day, s_month, s_year) == -1 ||
+           julian_date(e_day, e_month, e_year) == -1){
+
+            printf("\nAn invalid date was entered. Try again");
+            while(c = getchar() != '\n' && c != EOF);
+            continue;
+        }
+
         ////////////////////////////////////////////////////
         //           Calculate date from input            //
         ////////////////////////////////////////////////////
 
-        /* Algorithm:
-         * 1. Determine which date is greater.
-         *    If the end date is less than start, swap the dates
-         *    and remember they are swapped.
-         * 2. Add up each year's total number of days
-         * 3. For start, remove the days between the start and 
-         *    the beginning of the year.
-         * 4. For end, remove the days between the end date and
-         *    the end of the year.
-         * 5. If the dates were swapped, make the diff negative.
-         */
-        int totalDiff = 0;
-        int dir;
-        int i;
-
-        // determine which date is greater
-        dir = (e_year >= s_year) ? 1 : -1;
-        if(e_year == s_year){
-            dir = (julian_date(e_day, e_month, e_year) >= 
-                   julian_date(s_day, s_month, s_year)) ? 1 : -1;
-        }
-        // If start > end, swap the dates for calculation
-        if(dir == -1){
-            int temp1, temp2, temp3;
-            temp1   = s_year;
-            temp2   = s_month;
-            temp3   = s_day;
-            s_year  = e_year;
-            e_year  = temp1;
-            s_month = e_month;
-            e_month = temp2;
-            s_day   = e_day;
-            e_day   = temp3;
-        }
-
-        // sum up each year's total # of days
-        for(i = s_year; i <= e_year; i++){
-            totalDiff += julian_date(31, 12, i);
-        }
-        // remove the difference from start to beginning of year and
-        // from end to end of year.
-        totalDiff -= julian_date(31, 12, e_year) - julian_date(e_day, e_month, e_year);
-        totalDiff -= julian_date(s_day, s_month, s_year);
-        totalDiff *= dir;
+        totalDiff = dateDifference(s_day, s_month, s_year, e_day, e_month, e_year);
 
         printf("\nThe number of days between ");
-        if(dir == 1) printf("%d/%d/%d and %d/%d/%d is ", s_month, s_day, s_year, 
-                                                         e_month, e_day, e_year);
-        else         printf("%d/%d/%d and %d/%d/%d is ", e_month, e_day, e_year, 
-                                                         s_month, s_day, s_year);
-        printf("%d days\n\n", totalDiff);
+        printf("%d/%d/%d and %d/%d/%d is ", s_month, s_day, s_year, 
+                                            e_month, e_day, e_year);
+        if(totalDiff == 1) printf("%d day\n\n", totalDiff);
+        else               printf("%d days\n\n", totalDiff);
+
     } // while loop
+
     printf("\n\nGoodbye!\n\n");
     return 0;
 }

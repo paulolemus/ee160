@@ -1,7 +1,7 @@
 
 /*	file   : julian.c
- *	by     : Paulo Lemus
- *	login  : Plemus
+ *	by     : Kevin Liu
+ *	login  : liukevin
  *	date   : 2/23/2017
  *	team   : AMERICA
  *	members: Paulo Lemus, Kevin Liu, Christopher Amendola
