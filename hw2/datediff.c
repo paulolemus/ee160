@@ -26,6 +26,10 @@
  *       start date > end date. This is intentional.
  */
 int dateDifference(int sday, int smonth, int syear, int eday, int emonth, int eyear){
+#ifdef DEBUG
+    printf("day: %d, month: %d, year: %d, eday: %d, e_month: %d, eyear: %d",
+            sday, smonth, syear, eday, emonth, eyear);
+#endif
     int totalDiff = 0;
     int dir;
     int i;
@@ -61,6 +65,9 @@ int dateDifference(int sday, int smonth, int syear, int eday, int emonth, int ey
     totalDiff -= julian_date(sday, smonth, syear);
     totalDiff *= dir;
 
+#ifdef DEBUG
+    printf("TotalDiff: %d", totalDiff);
+#endif
     return totalDiff;
 }
 

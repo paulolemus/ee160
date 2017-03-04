@@ -7,6 +7,10 @@
  *	members: Paulo Lemus, Kevin Liu, Christopher Amendola
  */
 
+#ifdef DEBUG
+#include <stdio.h>
+#endif
+
 #include "julian.h"
 #include "days.h"
 
@@ -23,7 +27,10 @@
  * 4. Return sum
  *
  */
-int julian_date(int day, int month, int year){  
+int julian_date(int day, int month, int year){
+#ifdef DEBUG
+    printf("day: %d, month: %d, year: %d\n", day, month, year);
+#endif
     int sum = 0;
     int i;
 
@@ -33,5 +40,8 @@ int julian_date(int day, int month, int year){
     }
 
     if(day > days_in_month(month, year)) return -1;
+#ifdef DEBUG
+    printf("Sum: %d\n", sum);
+#endif
     return sum;
 }
