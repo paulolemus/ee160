@@ -6,14 +6,14 @@
 
 /*  utility function declaration  */
 
-#include "charutil.h"
+#include "letters.h"
 
-int is_vowel(char)
+int is_vowel(char ch)
 {
-    if(IS_UPPER(char)) //change uppercase to lowercases
-        char -= 32;
+    if(IS_UPPER(ch)) //change uppercase to lowercases
+        ch += 32;
 
-    switch(char) //checks char is a vowel or not
+    switch(ch) //checks ch is a vowel
     {
         case 'a':
         case 'e':
@@ -24,11 +24,12 @@ int is_vowel(char)
     }
 }
 
-int is_h_consonant(char)
+int is_h_consonant(char ch)
 {
-    if(IS_UPPER(char)) //changes uppercase to lowercase
-        char -= 32;
-    switch(char)
+    if(IS_UPPER(ch)) //changes uppercase to lowercase
+        ch += 32;
+
+    switch(ch) //checks ch is a consonant
     {
         case 'h':
         case 'k':

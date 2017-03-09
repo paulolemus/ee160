@@ -7,6 +7,7 @@
 /*  utility functions declarations  */
 
 #define IS_UPPER(c) (c >= 'A' && c <= 'Z')
+#define FLUSH while(getchar() != '\n');
 #define TRUE 1
 #define FALSE 0
 
