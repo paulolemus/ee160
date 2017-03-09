@@ -6,6 +6,10 @@
 
 /*  utility functions declarations  */
 
+#define IS_UPPER(c) (c >= 'A' && c <= 'Z')
+#define TRUE 1
+#define FALSE 0
+
 int is_vowel(char);
 /*  checks if character is a vowel  */
 
