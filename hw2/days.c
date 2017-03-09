@@ -1,40 +1,38 @@
-//      File:   days.c
-//      By:     Kevin Liu
-//      login:  liukevin
-//      Team:   AMERICA
-//      Members:Paulo, Christopher
-//      Date:   02/21/17
+/* File   : days.c
+ * By     : Kevin Liu
+ * login  : liukevin
+ * Team   : AMERICA
+ * Members: Paulo, Christopher
+ * Date   : 02/21/17
+ */
 
-/*      Function Definiton to get numbers of days in that month */
-
+/* Function Definiton to get numbers of days in that month
+ * 
+ * ALGORITHM:
+ * 1. Return error value if the month given is out of bounds
+ * 2. Assign days using even months = 30 and odd months = 31
+ *    This covers months 1-7 except for 2
+ * 3. Assign days for months greater than 7 months, where case
+ *    switches, as evens = 31 and odds = 30.
+ * 4. Lastly, check if the month is february. If it is,
+ *    then assign days the number of days in feb. checking
+ *    if it is in a leap year.
+ */
 #include "days.h"
+#include "leap.h"
 
-int days_in_month(int month, int year)
-{
-        if (month <= 7 && month > 0) //when months July and before 
-        {
-                if (month % 2 != 0) //if odd months (Jan, Mar, May, July)
-                        return 31;
-                else //if even months (Feb, Apr, June)
-                {
-                        if (month == 2) //February
-                        {
-                                if (is_leap(year))
-                                        return 29;
-                                else
-                                        return 28;
-                        }
-                        else //April & June
-                                return 30;
-                }
-        }
-        else if(month >= 7) //months after July
-        {
-                if (month % 2 != 0) //if odd months (Sept, Nov)
-                        return 30;
-                else //if even months (Aug, Oct, Dec)
-                        return 31;
-        }
-        else
-                return 0;
+int days_in_month(int month, int year){
+    int days = 0;
+
+    // check bounds
+    if(month > 12) return -1;
+    
+    // Figure out number of days
+    if(month % 2 == 1 && month < 8) days = 31;
+    else days = 30;
+    if(month % 2 != 0 && month > 7) days = 30;
+    if(month % 2 == 0 && month > 7) days = 31;
+    if(month == 2) days = 28 + is_leap(year);
+
+    return days;
 }

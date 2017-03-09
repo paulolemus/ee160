@@ -1,34 +1,44 @@
-//      File:   driver3.c
-//      By:     Kevin Liu
-//      login:  liukevin
-//      Team:   AMERICA
-//      Members:Paulo, Christopher
-//      Date:   03/03/17
+/*	file   : driver3.c
+ *	by     : Paulo Lemus
+ *	login  : plemus
+ *	date   : 2/17/2017
+ *	team   : AMERICA
+ *	members: Paulo Lemus, Kevin Liu, Christopher Amendola
+ */
 
-/*  main function to calculate julian date of given date  */
+/* A program to test the validity of int julian_date function.
+ *
+ * This program asks user to enter a month, day, and year, and 
+ * prints the julian date.
+ *
+ * Status: FINIHSED, needs comments
+ */
 
 #include <stdio.h>
 #include "julian.h"
+int main(){
 
-int main()
-{
-        int day, month, year, julian;
+    int day;
+    int month;
+    int year;
 
-        /*  program description  */
-        printf("Starting Julian Date Program...\n");
-        /*  ask for user input  */
-        printf("Please enter a date (dd mm yy) EOF to exit: ");
+    printf("Entering Julian date driver...\n\n");
+    printf("Enter a month, day, and year (mm dd yyyy): ");
 
-        /*  when there are inputs  */
-        while (scanf("%d %d %d", &day, &month, &year) != EOF)
-        {
-                /*  compute julian date  */
-                julian = julian_date(day, month, year);
-                /*  print julian date  */
-                printf("The julian date is: day %d\n", julian);
-                /*  get new input  */
-                printf("Please enter a date (DD MM YYYY) [EOF to exit]: ");
-        }
-        /*  close program & exit  */
-        printf("\nGoodbye!\n");
+    while(scanf("%d", &month) != EOF &&
+          scanf("%d", &day)   != EOF &&
+          scanf("%d", &year)  != EOF){
+
+        printf("Julian date of %d/%d in %d: %d",
+               month,
+               day,
+               year,
+               julian_date(day, month, year));
+
+        while(getchar() != '\n');
+        printf("\n\nEnter a month, day, and year (mm dd yyyy): ");
+    }
+
+    printf("\nGoodbye!\n\n");
+    return 0;
 }
