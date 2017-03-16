@@ -48,3 +48,18 @@ int is_delimiter(char ch)
 {
     return !(isalpha(ch) || ch == '`');
 }
+
+int delimitp(char ch)
+{
+    switch(ch)
+    {
+        case ' ':
+        case '\n':
+        case '\t':
+        case ',':
+        case '!':
+        case '"':
+        case '.': return TRUE;
+        default: return FALSE;
+    }
+}
