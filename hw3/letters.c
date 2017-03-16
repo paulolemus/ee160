@@ -1,8 +1,9 @@
-/*      File:   letters.c
- *      By:     Kevin Liu
- *      Login:  liukevin
- *      Team:   AMERICA
- *      Members:Paulo, Christopher  */
+/*      File   : letters.c
+ *      By     : Kevin Liu / Christopher
+ *      Login  : liukevin  / camendol
+ *      Team   : AMERICA
+ *      Members: Paulo, Christopher  
+ */
 
 /*  utility function declaration  */
 
@@ -46,12 +47,14 @@ int is_h_consonant(char ch)
 
 int is_delimiter(char ch)
 {
+    // considers any non-letter 
+    // character (or Okina) as a delimiter
     return !(isalpha(ch) || ch == '`');
 }
 
 int delimitp(char ch)
 {
-    switch(ch)
+    switch(ch) // Checks if ch is any symbol below
     {
         case ' ':
         case '\n':

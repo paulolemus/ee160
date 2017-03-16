@@ -1,4 +1,4 @@
-/*      File:   spchk.h
+/*      File:   spchk1.h
  *      By:     Paulo Lemus
  *      Login:  plemus
  *      Team:   AMERICA
@@ -8,6 +8,8 @@
 
 /* This file contains the complete declaration and definition of 
  * functions that are used in the spchk.c driver file.
+ * 
+ * This is an extra file. Please refer to spchk.c as the primary file
  */
 
 #ifndef EE_HW3_SPCHK_H_
@@ -18,7 +20,7 @@
  * if it does not.
  * This function evaluates input from stdin, given the first
  * letter of the character. It also updated the given character
- * so that there is no change of losing the EOF character
+ * so that there is no chance of losing the EOF character
  */
 int eval_word(char*);
 

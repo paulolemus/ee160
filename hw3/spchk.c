@@ -2,7 +2,8 @@
  *      By:     Kevin Liu
  *      Login:  liukevin
  *      Team:   AMERICA
- *      Members:Paulo, Christopher      */
+ *      Members:Paulo, Christopher
+ */
 
 #include <stdio.h>
 #include "letters.h"

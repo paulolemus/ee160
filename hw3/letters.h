@@ -1,5 +1,5 @@
 /*      File:   letters.h
- *      By:     Kevin Liu
+ *      By:     Christpoher
  *      Login:  liukevin
  *      Team:   AMERICA
  *      Members:Paulo, Christopher  */
@@ -18,17 +18,13 @@ int is_vowel(char);
 /*  checks if character is a vowel  */
 
 int is_h_consonant(char);
-<<<<<<< HEAD
 /*  checks if character is a consonant  */
 
 int delimitp(char);
 /*  checks if character is blank space or punctutation  */
-=======
-/*  checks if consonant  */
 
 int is_delimiter(char);
-/*  checks if is delimeter */
+/*  checks if is NOT a vowel or consonant, in other words a delimiter */
 
 
 #endif
->>>>>>> c2a636d9f262d5ac44465a7110eaf9d6e3b7ea65
