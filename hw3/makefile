@@ -1,5 +1,3 @@
-
-
 # Problem 1 - test driver
 driver1: driver1.o letters.o
 	cc driver1.o letters.o -o driver1
