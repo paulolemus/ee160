@@ -6,6 +6,7 @@
 
 /*  utility function declaration  */
 
+#include <ctype.h>
 #include "letters.h"
 
 int is_vowel(char ch)
@@ -41,4 +42,9 @@ int is_h_consonant(char ch)
         case '`': return TRUE;
         default: return FALSE;
     }
+}
+
+int is_delimiter(char ch)
+{
+    return !(isalpha(ch) || ch == '`');
 }

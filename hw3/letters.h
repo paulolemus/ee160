@@ -5,6 +5,9 @@
  *      Members:Paulo, Christopher  */
 
 /*  utility functions declarations  */
+#ifndef EE_HW3_LETTER_H_
+#define EE_HW3_LETTER_H_
+
 
 #define IS_UPPER(c) (c >= 'A' && c <= 'Z')
 #define FLUSH while(getchar() != '\n');
@@ -16,3 +19,9 @@ int is_vowel(char);
 
 int is_h_consonant(char);
 /*  checks if consonant  */
+
+int is_delimiter(char);
+/*  checks if is delimeter */
+
+
+#endif
