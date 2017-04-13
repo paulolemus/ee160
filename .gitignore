@@ -13,7 +13,7 @@
 !README
 !*.dat
 
-!hw4/*.o
+!hw4/display.o
 
 # Object files
 #*.o
