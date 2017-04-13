@@ -7,5 +7,10 @@
 
 /* TODO: Write all the functions for the prototypes
  * in the move.h header!
+ */
+char move(int* x, int* y) {
+
+
+}
 
 #include "move.h"
