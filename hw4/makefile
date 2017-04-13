@@ -13,8 +13,8 @@ moveTest: moveTest.o move.o display.o
 placeTest: placeTest.o place.o
 	cc placeTest.o place.o -o placeTest
 
-attackTest: attackTest.o attack.o move.o display.o
-	cc attackTest.o attack.o move.o display.o -o attackTest -lncurses
+attackTest: attackTest.o attack.o move.o display.o place.o
+	cc attackTest.o attack.o move.o display.o place.o -o attackTest -lncurses
 
 gsnake: driver.o attack.o place.o move.o place.o
 	cc driver.o attack.o place.o move.o place.o -o gsnake -lncurses
