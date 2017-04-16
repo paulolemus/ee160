@@ -69,7 +69,59 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
  */
 int attack_medium(int mx, int my, int* ax, int* ay) {
 
-    return ALIVE;
+    // Clear the snek's current position
+    draw_symbol(*ax, *ay, ' ');
+
+    // If the snek has not eaten Timmy,
+    // then one of these variables will != 0.
+    int horizontal = 0, vertical = 0;
+
+    /* Figure out which direction has the shortest
+     * distance to Timmy.
+     */
+    int xShort  = mx - *ax;
+    int xDiff   = (mx - WIDTH) - *ax;
+    xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+    xDiff  = (mx + WIDTH) - *ax;
+    xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+
+    int yShort  = my - *ay;
+    int yDiff   = (my - HEIGHT) - *ay;
+    yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+    yDiff  = (my + HEIGHT) - *ay;
+    yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+   
+    if(xShort < 0)      horizontal = -1;
+    else if(xShort > 0) horizontal = 1;
+    if(yShort < 0)      vertical   = -1;
+    else if(yShort > 0) vertical   = 1;
+
+
+    // Move snek only one direction towards Timmy
+    // with a random priority in either direction 
+    // possible.
+    int select = rand() % 2;
+    if(select) {
+        if(horizontal != 0) *ax = *ax + horizontal;
+        else                *ay = *ay + vertical;
+    }
+    else {
+        if(vertical != 0) *ay = *ay + vertical;
+        else              *ax = *ax + horizontal;
+    }
+
+    // Teleport snek if boundary crossed
+    if     ( *ax >= WIDTH )  *ax = 0;
+    else if( *ay >= HEIGHT ) *ay = 0;
+    else if( *ax < 0 )       *ax = WIDTH - 1;
+    else if( *ay < 0 )       *ay = HEIGHT - 1;
+
+    // Draw the snek
+    draw_symbol(*ax, *ay, MOOK);
+
+    // Check if snek has eaten timmy
+    if(*ax == mx && *ay == my) return DEAD;
+    else                       return ALIVE;
 }
 
 
@@ -79,7 +131,18 @@ int attack_medium(int mx, int my, int* ax, int* ay) {
  */
 int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
 
-    return ALIVE;
+    // Clear the snek's current position
+    draw_symbol(*ax, *ay, ' ');
+
+    // TODO: WRITE LOGIC FOR HARD DIFFICULTY
+
+
+    // Draw the snek
+    draw_symbol(*ax, *ay, MOOK);
+
+    // Check if snek has eaten timmy
+    if(*ax == mx && *ay == my) return DEAD;
+    else                       return ALIVE;
 }
 
 
