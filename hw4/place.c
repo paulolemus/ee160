@@ -1,24 +1,18 @@
 /*
- * file: place.c
- * by:
- * login:
- * date: 4/12/2017
- * team: AMERICA
- * members: Kevin L, Paulo L, Christopher A
- */
+file: place.c
+by: Kevin Liu
+login: liukevin
+date: 04/12/17
+team: AMERICA
+members: Paulo, Chris, Kevin
+*/
+#include <stdio.h>
 #include <stdlib.h>
-#include "display.h"
-#include "place.h"
-
+void place(int *x, int *y)
 /* Generates 2 random integers saves them in the pointers given
- * Given: 2 pointers to intgers
- * Returns: nothing 
- * 
- * ALGORITHM:
- * Generate random coordinate
- * Save coordinate
- */
-void place(int *x, int *y) {
-    *x = rand() % WIDTH;
-    *y = rand() % HEIGHT;
+ * Given: 2 pointers to integers
+ * Returns: nothing */
+{
+    *x = rand() % 40;
+    *y = rand() % 20;
 }

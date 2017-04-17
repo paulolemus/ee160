@@ -1,43 +1,33 @@
 /*
- * file    : moveTest.c
- * by      : Paulo Lemus
- * login   : Plemus
- * date    : 4/12/2017
- * team    : AMERICA
- * members : Paulo L, Kevin L, Christopher A
+file: moveTest.c
+by: Kevin Liu
+login: liukevin
+date: 03/25/17
+team: AMERICA
+members: Paulo, Christopher, Kevin
 */
 
-/* Test file for move module */
+/* Test file for display module */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "display.h"
 #include "move.h"
 
 int main()
 {
-    int timX = 0;
-    int timY = 0;
-    char cmd = 't'; // random
+    char ch;
+    int x,y;
+    x = y = 10;
 
-    char* text[10];
-    text[1] = "Welcome! This is a move test program";
-    text[2] = "Press w, a, s, or d to move.";
-    text[3] = "Alternatively, use the i, j, k, l control scheme";
+	draw_map();
+    display_pos(x,y);
 
-    draw_map();
-    debug_wds(1, text[1]);
-    debug_wds(2, text[2]);
-    debug_wds(3, text[3]);
-    draw_symbol(timX, timY, TIMMY);
-    display_pos(timX, timY);
-    display_score(-999);
+    draw_symbol(x,y,TIMMY); //place Timmy in a random spot  */
 
-    while(cmd != 'q') {
-        cmd = move(&timX, &timY);
-        display_pos(timX, timY);
-        display_score(-999);
-    }
+    move(&x,&y);//move Timmy around
 
-    clear_screen();
+	clear_screen();
+
 	return 0;
 }

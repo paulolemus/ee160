@@ -1,55 +1,57 @@
-/* File: move.c
- * Name:
- * Login: 
- * Date: 4/12/2017
- * Team: AMERICA
- */
-
+/*
+file: move.c
+by: Kevin Liu
+login: liukevin
+date: 04/12/17
+team: AMERICA
+members: Paulo, Chris, Kevin
+*/
 #include <stdio.h>
 #include "display.h"
 #include "move.h"
 
+char move(int *x, int *y)
+    /* Gets input from player updates the motes posistion and moves 
+     * the mote accordingly
+     * Given: pointers to the position of the mote
+     * Returns: command entered */
+{
+    char ch;
 
-/* ALGORITHM:
- * Get player command
- * Update timmy's position
- * display Timmy at new position
- * return command entered
- */
-char move(int* x, int* y) {
-    // Get player command
-    char cmd = getchar();
-    draw_symbol(*x, *y, ' ');
-    
-    switch(cmd) {
-        case 'w':
-        case 'i':
-            *y = *y - 1;
-            if(*y < 0) *y = HEIGHT - 1;
-            break;
+    while((ch = getchar()) != 'q')
+    {
+        draw_symbol(*x,*y,' '); //remove Timmy from current position
+        switch(ch) //update Timmy's position (via pointer)
+        {
+            case 'w': //up
+            case 'k':
+                (*y)--;
+                break;
+            case 's': //down
+            case 'j':
+                (*y)++;
+                break;
+            case 'a': //left
+            case 'h':
+                (*x)--;
+                break;
+            case 'd': //right
+            case 'l':
+                (*x)++;
+                break;
+        }
 
-        case 'a':
-        case 'j':
-            *x = *x - 1;
-            if(*x < 0) *x = WIDTH - 1;
-            break;
+        /*  reset position back to grid  */
+        if(*x < 0)
+            *x = *x +40;
+        if(*y < 0)
+            *y = *y + 40;
+        *x = *x % 40;
+        *y = *y % 20;
 
-        case 's':
-        case 'k':
-            *y = *y + 1;
-            if(*y >= HEIGHT) *y = 0;
-            break;
-
-        case 'd':
-        case 'l':
-            *x = *x + 1;
-            if(*x >= WIDTH ) *x = 0;
-            break;
-
-        default: break;
+        draw_symbol(*x,*y,TIMMY); //display Timmy's position
+        display_pos(*x,*y);
     }
-    // Draw timmy to screen
-    draw_symbol(*x, *y, TIMMY);
-    return cmd;
+    return ch;
 }
 

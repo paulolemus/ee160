@@ -1,40 +1,33 @@
-/* File     : placeTest.c
- * Name     :
- * Login    :
- * Date     : 4/12/2017
- * Team     : AMERICA
- * Members  : Kevin L, Christopher A, Paulo L
- */
+/*
+file: placeTest.c
+by: Kevin Liu
+login: liukevin
+date: 03/25/17
+team: AMERICA
+members: Paulo, Christopher, Kevin
+*/
 
-/* This program will repeatedly print numbers until the user
- * enters any character that is not a 'y'.
- *
- * Status: FINISHED
- */
+/* Test file for display module */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include "place.h"
 
-int main() {
+#define FLUSH while(getchar() != '\n');
 
-    // Seed the rand function with the current time to ensure
-    // that the rand is different each time
-    srand(time(NULL));
-
-    char cmd; // saved character entered by user
-    int x, y; // x and y position that get randomized
+int main()
+{
+    char ch;
+    int x,y;
 
     printf("Do you want a random coordinate (y/n)? ");
-
-    while((cmd = getchar()) == 'y') {
-        place(&x, &y);
-        printf("(%d, %d)\n", x, y);
+    while(getchar() == 'y')
+    {
+        place(&x,&y);
+        printf("(%d,%d)\n", x, y);
+        FLUSH;
         printf("Do you want a random coordinate (y/n)? ");
-        while(getchar() != '\n');
     }
 
-    printf("\n\nGoodbye!\n\n");
-    return 0;
+	return printf("Goodbye!\n");
 }
