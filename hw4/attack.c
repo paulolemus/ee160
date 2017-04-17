@@ -32,9 +32,9 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
      */
     int diffx  = mx - *ax;
     int diffy  = my - *ay;
-    int select = rand() % 2;
+    int select = rand() % 5;
 
-    if(select) {
+    if(select == 0 || select == 2) {
 
         if(diffx > 0) *ax = *ax + 1;
         else if(diffx < 0) *ax = *ax - 1;
@@ -43,7 +43,7 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
             else if(diffy < 0) *ay = *ay - 1;
         }
     }
-    else {
+    else if(select == 1 || select == 3) {
 
         if(diffy > 0) *ay = *ay + 1;
         else if(diffy < 0) *ay = *ay - 1;
@@ -51,6 +51,9 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
             if(diffx > 0) *ax = *ax + 1;
             else if(diffx < 0) *ax = *ax - 1;
         }
+    }
+    else {
+        // Do nothing
     }
 
     // Draw the snek
@@ -134,8 +137,55 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
     // Clear the snek's current position
     draw_symbol(*ax, *ay, ' ');
 
-    // TODO: WRITE LOGIC FOR HARD DIFFICULTY
+    int horizontal = 0, vertical = 0;
+    int xTimToJuju, yTimToJuju;
+    int xSnekToJuju, ySnekToJuju;
+    int xDiff, yDiff;
 
+    // Calculate Tim's distance to Juju
+    xTimToJuju = jx - mx;
+    xDiff = (jx + WIDTH) - mx;
+    xTimToJuju = (abs(xDiff) < abs(xTimToJuju)) ? xDiff: xTimToJuju;
+    xDiff = (jx - WIDTH) - mx;
+    xTimToJuju = (abs(xDiff) < abs(xTimToJuju)) ? xDiff: xTimToJuju;
+    yTimToJuju = jy - my;
+    yDiff = (jy + HEIGHT) - my;
+    yTimToJuju = (abs(yDiff) < abs(yTimToJuju)) ? yDiff: yTimToJuju;
+    yDiff = (jy - HEIGHT) - my;
+    yTimToJuju = (abs(yDiff) < abs(yTimToJuju)) ? yDiff: yTimToJuju;
+
+    // Calculate Tim's distance to Juju
+    xSnekToJuju = jx - *ax;
+    xDiff = (jx + WIDTH) - *ax;
+    xSnekToJuju = (abs(xDiff) < abs(xSnekToJuju)) ? xDiff: xSnekToJuju;
+    xDiff = (jx - WIDTH) - *ax;
+    xSnekToJuju = (abs(xDiff) < abs(xSnekToJuju)) ? xDiff: xSnekToJuju;
+    ySnekToJuju = jy - *ay;
+    yDiff = (jy + HEIGHT) - *ay;
+    ySnekToJuju = (abs(yDiff) < abs(ySnekToJuju)) ? yDiff: ySnekToJuju;
+    yDiff = (jy - HEIGHT) - *ay;
+    ySnekToJuju = (abs(yDiff) < abs(ySnekToJuju)) ? yDiff: ySnekToJuju;
+    
+
+
+    // Move snek only one direction towards Timmy
+    // with a random priority in either direction 
+    // possible.
+    int select = rand() % 2;
+    if(select) {
+        if(horizontal != 0) *ax = *ax + horizontal;
+        else                *ay = *ay + vertical;
+    }
+    else {
+        if(vertical != 0) *ay = *ay + vertical;
+        else              *ax = *ax + horizontal;
+    }
+
+    // Teleport snek if boundary crossed
+    if     ( *ax >= WIDTH )  *ax = 0;
+    else if( *ay >= HEIGHT ) *ay = 0;
+    else if( *ax < 0 )       *ax = WIDTH - 1;
+    else if( *ay < 0 )       *ay = HEIGHT - 1;
 
     // Draw the snek
     draw_symbol(*ax, *ay, MOOK);

@@ -17,7 +17,7 @@ attackTest: attackTest.o attack.o move.o display.o place.o
 	cc attackTest.o attack.o move.o display.o place.o -o attackTest -lncurses
 
 gsnake: driver.o attack.o place.o move.o place.o
-	cc driver.o attack.o place.o move.o place.o -o gsnake -lncurses
+	cc driver.o attack.o display.o move.o place.o -o gsnake -lncurses
 
 dispTest.o: display.h
 

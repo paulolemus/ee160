@@ -12,7 +12,12 @@
 
 #define DEAD 0
 #define ALIVE 1
+#define SURVIVOR 2
 #define POWEROVERWHELLMING 0
+
+#define EASY_MODE   1
+#define MEDIUM_MODE 2
+#define HARD_MODE   3
 
 int attack_easy(int mx, int my, int* ax, int* ay);
 /* Updates the poistion of the attacker to move towards the mote.
