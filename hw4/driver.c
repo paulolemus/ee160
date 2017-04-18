@@ -32,6 +32,7 @@ int main()
     int score = 0;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
+    int teleports = 0;          // teleportation counter
 
     // place Timmy somewhere random to start
     place(&xTim, &yTim); 
@@ -68,7 +69,8 @@ int main()
     display_score(score);
 
     // Main game logic while loop
-    while(cmd != 'q' && state == ALIVE) {
+    while(cmd != 'q' && state == ALIVE) 
+    {
 
         // Draw juju in case the snek moved over it
         draw_symbol(xJuju, yJuju, JUJU);
@@ -77,26 +79,32 @@ int main()
         cmd = move(&xTim, &yTim);
 
         // Snek attack
-        if(difficulty == HARD_MODE) {
+        if(difficulty == HARD_MODE) 
+        {
             state = attack_hard(xTim, yTim, xJuju, yJuju, &xSnek, &ySnek);
         }
-        else if(difficulty == MEDIUM_MODE) {
+        else if(difficulty == MEDIUM_MODE) 
+        {
             state = attack_medium(xTim, yTim, &xSnek, &ySnek);
-            if(score >= 20) {
+            if(score >= 20) 
+            {
                 difficulty = HARD_MODE;
                 text[10] = warnings[difficulty];
             }
         }
-        else {
+        else 
+        {
             state = attack_easy(xTim, yTim, &xSnek, &ySnek);
-            if(score >= 10) {
+            if(score >= 10) 
+            {
                 difficulty = MEDIUM_MODE;
                 text[10] = warnings[difficulty];
             }
         }
 
         // Juju logic
-        if(xTim == xJuju && yTim == yJuju) {
+        if(xTim == xJuju && yTim == yJuju) 
+        {
             score++;
             do {
                 place(&xJuju, &yJuju);
@@ -104,12 +112,24 @@ int main()
                     yJuju == yTim || yJuju == ySnek);
             draw_symbol(xJuju, yJuju, JUJU);
         }
-        if(score >= 29) {//1 point away from winning
+        
+        // Process special commands
+        // Teleport
+        if(cmd == ' ' && teleports < 3) 
+        {
+            teleports++;
+            teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
+        }
+
+        if(score >= 29) 
+        {//1 point away from winning
             debug_wds(8, text[8]);
             portal_print(xJuju, yJuju); //spawns portal around Juju
             draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
         }
-        if(score == 30) { //beats the game!
+
+        if(score == 30) 
+        { //beats the game!
             state = SURVIVOR;
         }
         // Update counters || Strings
