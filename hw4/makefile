@@ -16,8 +16,8 @@ placeTest: placeTest.o place.o
 attackTest: attackTest.o attack.o move.o display.o place.o
 	cc attackTest.o attack.o move.o display.o place.o -o attackTest -lncurses
 
-gsnake: driver.o attack.o place.o move.o place.o portal.o teleport.o
-	cc driver.o attack.o display.o move.o place.o portal.o teleport.o -o gsnake -lncurses
+gsnake: driver.o attack.o place.o move.o place.o portal.o
+	cc driver.o attack.o display.o move.o place.o portal.o -o gsnake -lncurses
 
 dispTest.o: display.h
 
@@ -37,7 +37,7 @@ driver.o: attack.h place.h move.h display.h
 
 portal.o: portal.h
 
-teleport.o: teleport.h display.h place.h
+#teleport.o: teleport.h display.h place.h
 
 links:
 	 ln -s -f $(GAME)/display.o .

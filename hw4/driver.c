@@ -19,7 +19,7 @@
 #include "place.h"
 #include "attack.h"
 #include "portal.h"
-#include "teleport.h"
+//#include "teleport.h"
 
 int main()
 {
@@ -119,7 +119,7 @@ int main()
         if(cmd == ' ' && teleports < 3) 
         {
             teleports++;
-            teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
+            //teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
         }
 
         if(score >= 29) 

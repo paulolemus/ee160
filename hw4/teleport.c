@@ -7,9 +7,12 @@ team    : AMERICA
 members : Paulo, Chris, Kevin
 */
 
+#include <unistd.h>
 #include "teleport.h"
 #include "display.h"
 #include "place.h"
+
+#define SLEEP_TIME 5000
 
 void teleport(int* xTim, int* yTim,
               int xSnek, int ySnek,
@@ -27,21 +30,33 @@ void teleport(int* xTim, int* yTim,
             xNew == xJuju || yNew == yJuju);
 
     int i, j, k;
-    for(i = 0; i < WIDTH + lineWidth; ++i) {
+    for(i = 0; i < WIDTH + HEIGHT + lineWidth; ++i) {
 
         // Fill up lines with TIMMYS
-        for(j = i, k = 0; j >= 0 && k < HEIGHT; --j, ++k) {
-            if((j != xSnek && k != ySnek) &&
-               (j != xJuju && k != yJuju)) draw_symbol(j, k, TIMMY);
+        for(j = i, k = 0; j >= 0; --j, ++k) {
 
+            if((j != xSnek || k != ySnek) &&
+               (j != xJuju || k != yJuju) &&
+               (j < WIDTH)                &&
+               (k < HEIGHT)) 
+            {
+                draw_symbol(j, k, TIMMY);
+            }
         }
 
         // Clear previous lines
-        for(j = i - lineWidth, k = 0; j >= 0 && k < HEIGHT; --j, ++k) {
-            if((j != *xTim && k != *yTim) &&
-               (j != xSnek && k != ySnek) &&
-               (j != xJuju && k != yJuju)) draw_symbol(j, k, ' ');
+        for(j = i - lineWidth, k = 0; j >= 0; --j, ++k) {
+
+            if((j != xNew  || k != yNew)  &&
+               (j != xSnek || k != ySnek) &&
+               (j != xJuju || k != yJuju) &&
+               (j < WIDTH)                &&
+               (k < HEIGHT)) 
+            {
+                draw_symbol(j, k, ' ');
+            }
         }
+        usleep(SLEEP_TIME);
     }
     *xTim = xNew;
     *yTim = yNew;
