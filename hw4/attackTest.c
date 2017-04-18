@@ -16,10 +16,12 @@
 
 int main() {
 
+    // seed rand so we get different values each time
     srand(time(NULL));
 
     int timX  = 0, timY  = 0;
     int snekX = 0, snekY = 0;
+    int xJuju = WIDTH / 2, yJuju = HEIGHT / 2;
 
     char cmd  = 'v'; // random
     char diff = 'e'; // Difficulty of snek
@@ -28,6 +30,7 @@ int main() {
     // Place the snek at a random location
     while(snekX == timX && snekY == timY) place(&snekX, &snekY);
 
+    // All text we will render to screen
     char* text[10];
     text[1] = "Welcome! This is a attack test for the snek.";
     text[2] = "Use the a, s, d, f control scheme to move.";
@@ -36,6 +39,7 @@ int main() {
     text[6] = "Press e for easy, r for medium, and t for hard.";
     text[7] = "The snek's position is shown in the lower left hand corner.";
 
+    // Draw everything prior to the first loop
     draw_map();
     debug_wds(1, text[1]);
     debug_wds(2, text[2]);
@@ -46,6 +50,7 @@ int main() {
 
     draw_symbol(timX, timY, TIMMY);
     draw_symbol(snekX, snekY, MOOK);
+    draw_symbol(xJuju, yJuju, JUJU);
     display_pos(snekX, snekY);
     display_score(-999);
 
@@ -66,13 +71,14 @@ int main() {
             debug_wds(8, "medium");
         }
         else if(diff == 't') {
-            state = attack_hard(timX, timY, 0, 0, &snekX, &snekY);
+            state = attack_hard(timX, timY, xJuju, yJuju, &snekX, &snekY);
             debug_wds(8, "hard");
         }
         else exit(-1);
 
         // Update position tracker
         display_pos(snekX, snekY);
+        draw_symbol(xJuju, yJuju, JUJU);
 
         // Quit if player is dead
         if(state == DEAD) cmd = 'q';

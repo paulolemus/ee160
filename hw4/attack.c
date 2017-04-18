@@ -143,18 +143,6 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
     int xTemp, yTemp;
     int xJuju = jx, yJuju = jy;
    
-    /*
-    // Determine coordinates of closest Juju.
-    xTemp = jx + WIDTH;
-    yTemp = jy + HEIGHT;
-    if(abs(xJuju - mx) < abs(xTemp - mx)) xJuju = xTemp;
-    if(abs(yJuju - my) < abs(yTemp - my)) yJuju = yTemp;
-    xTemp = jx - WIDTH;
-    yTemp = jy - HEIGHT;
-    if(abs(xJuju - mx) < abs(xTemp - mx)) xJuju = xTemp;
-    if(abs(yJuju - my) < abs(yTemp - my)) yJuju = yTemp;
-    */
-
     // Find midpoint and slope of line connecting nearest Juju and Timmy
     int xMidEst = (mx + xJuju) / 2;
     int yMidEst = (my + yJuju) / 2;

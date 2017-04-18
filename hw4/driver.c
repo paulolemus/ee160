@@ -29,7 +29,7 @@ int main()
     int xSnek, ySnek;           // Snek! (the Mook)
     int xJuju, yJuju;           // Juju!
     int state = ALIVE;          // Timmy starts alive, duh
-    int score = 27;              // Score goes up with each Juju
+    int score = 0;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
 
@@ -106,12 +106,11 @@ int main()
         }
         if(score >= 29) {//1 point away from winning
             debug_wds(8, text[8]);
-            portal_print(xJuju,yJuju); //spawns portal around Juju
+            portal_print(xJuju, yJuju); //spawns portal around Juju
             draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
         }
         if(score == 30) { //beats the game!
             state = SURVIVOR;
-            break;
         }
         // Update counters || Strings
         draw_symbol(xTim, yTim, TIMMY);
