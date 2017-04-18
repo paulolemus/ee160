@@ -40,7 +40,7 @@ int main()
     int score = 0;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
-    int teleports = 0;          // teleportation counter
+    int teleports  = 0;         // teleportation counter
 
     // place Timmy somewhere random to start
     place(&xTim, &yTim); 
@@ -50,9 +50,9 @@ int main()
 
     // All the text we display to the screen
     char* warnings[3];
-    warnings[EASY_MODE] = "\"The creature is annoyed but sleepy...\"";
-    warnings[MEDIUM_MODE] = "\"Its chasing me through walls!\"";
-    warnings[HARD_MODE] = "\"Is it blocking that Juju?!?\"";
+    warnings[EASY_MODE]   = "\"The creature is annoyed but sleepy...\"";
+    warnings[MEDIUM_MODE] = "\"Its chasing me through walls!\"        ";
+    warnings[HARD_MODE]   = "\"Is it blocking that Juju?!?\"          ";
 
     char* text[12];
     text[2] = "I wanna go home!";
@@ -86,7 +86,8 @@ int main()
         // Move Timmy
         cmd = move(&xTim, &yTim);
 
-        // Snek attack
+        // Snek attack / cycle through difficulties
+        // at different scores
         if(difficulty == HARD_MODE) 
         {
             state = attack_hard(xTim, yTim, xJuju, yJuju, &xSnek, &ySnek);
@@ -94,7 +95,7 @@ int main()
         else if(difficulty == MEDIUM_MODE) 
         {
             state = attack_medium(xTim, yTim, &xSnek, &ySnek);
-            if(score >= 20) 
+            if(score >= 10) 
             {
                 difficulty = HARD_MODE;
                 text[10] = warnings[difficulty];
@@ -103,7 +104,7 @@ int main()
         else 
         {
             state = attack_easy(xTim, yTim, &xSnek, &ySnek);
-            if(score >= 10) 
+            if(score >= 5) 
             {
                 difficulty = MEDIUM_MODE;
                 text[10] = warnings[difficulty];
@@ -129,14 +130,14 @@ int main()
             teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
         }
 
-        if(score >= 24) 
+        if(score >= 12) 
         {//1 point away from winning
             debug_wds(8, text[8]);
             portal_print(xJuju, yJuju); //spawns portal around Juju
             draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
         }
 
-        if(score == 25) 
+        if(score == 13) 
         { //beats the game!
             state = SURVIVOR;
         }

@@ -33,6 +33,8 @@ void teleport(int* xTim, int* yTim,
             xNew == xSnek || yNew == ySnek ||
             xNew == xJuju || yNew == yJuju);
 
+    // Draw a wave that moves from the upper left corner
+    // of the screen to the bottom right corner.
     int i, j, k;
     for(i = 0; i < WIDTH + HEIGHT + lineWidth; ++i) {
 
@@ -60,8 +62,10 @@ void teleport(int* xTim, int* yTim,
                 draw_symbol(j, k, ' ');
             }
         }
+        // Sleep for 5 milliseconds so we can see animation
         usleep(SLEEP_TIME);
     }
+    // Set timmy's position to the updated location
     *xTim = xNew;
     *yTim = yNew;
 }

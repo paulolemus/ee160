@@ -34,10 +34,10 @@ int main() {
     char* text[10];
     text[1] = "Welcome! This is a attack test for the snek.";
     text[2] = "Use the a, s, d, f control scheme to move.";
-    text[3] = "Alternatively, use the i, j, k, l control scheme.";
-    text[5] = "The snek has three difficulty levels: easy, medium, hard.";
+    text[3] = "Alternatively, use the i, j, k, l scheme.";
+    text[5] = "The snek has 3 difficulty levels: easy, medium, hard.";
     text[6] = "Press e for easy, r for medium, and t for hard.";
-    text[7] = "The snek's position is shown in the lower left hand corner.";
+    text[7] = "The snek's position is shown in the lower left corner.";
 
     // Draw everything prior to the first loop
     draw_map();
@@ -47,8 +47,9 @@ int main() {
     debug_wds(5, text[5]);
     debug_wds(6, text[6]);
     debug_wds(7, text[7]);
+    debug_wds(8, "easy");
 
-    draw_symbol(timX, timY, TIMMY);
+    draw_symbol(timX,  timY,  TIMMY);
     draw_symbol(snekX, snekY, MOOK);
     draw_symbol(xJuju, yJuju, JUJU);
     display_pos(snekX, snekY);
