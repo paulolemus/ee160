@@ -130,14 +130,14 @@ int main()
             teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
         }
 
-        if(score >= 12) 
+        if(score >= 13) 
         {//1 point away from winning
             debug_wds(8, text[8]);
             portal_print(xJuju, yJuju); //spawns portal around Juju
             draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
         }
 
-        if(score == 13) 
+        if(score == 14) 
         { //beats the game!
             state = SURVIVOR;
         }

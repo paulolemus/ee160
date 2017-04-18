@@ -128,10 +128,10 @@ int attack_medium(int mx, int my, int* ax, int* ay) {
     else                       return ALIVE;
 }
 
-
-/* The Mook will attack by either taking an optimal path towards the user,
- * or under certain conditions, will guard the juju. The additional input,
- * jx and jy, are the x and y positions of the juju.
+/* This mode is not necessarily hard, just different.
+ * The snek will attempt to stay inbetween Timmy and the Juju
+ * and will occasionally attack Timmy if it is currently in a good
+ * position to defend.
  */
 int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
 
@@ -163,7 +163,7 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
         int yLine = yMidEst + slope * (xLine - xMidEst);
         int distance = abs(*ax - xLine) + abs(*ay - yLine);
 
-        if(distance < 3) closeToLine = 1;
+        if(distance < 2) closeToLine = 1;
 
         // Check if snek is close in other direction
         xLine = xMidEst - i;
@@ -171,7 +171,7 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
         yLine = yMidEst + slope * (xLine - xMidEst);
         distance = abs(*ax - xLine) + abs(*ay - yLine);
 
-        if(distance < 3) closeToLine = 1;
+        if(distance < 2) closeToLine = 1;
     }
 
     // If snek is close to line, attack Timmy.
@@ -197,7 +197,7 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
         else if(yShort > 0) vertical   = 1;
 
     }
-    else if(abs(xJuju - *ax) + abs(yJuju - *ay) < 4) {
+    else if(abs(xJuju - *ax) + abs(yJuju - *ay) < 3) {
 
         // Move towards midpoint
         int xShort  = xMidEst - *ax;
