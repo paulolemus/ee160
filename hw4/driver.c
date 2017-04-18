@@ -19,6 +19,7 @@
 #include "place.h"
 #include "attack.h"
 #include "portal.h"
+#include "teleport.h"
 
 int main()
 {
