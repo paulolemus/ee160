@@ -1,64 +1,35 @@
 /*
-file    : move.c
-by      : Kevin Liu
-login   : liukevin
+file    : teleport.c
+by      : Paulo Lemus
+login   : plemus
 date    : 04/12/17
 team    : AMERICA
 members : Paulo, Chris, Kevin
 */
-#include <stdio.h>
+
+#include "teleport.h"
 #include "display.h"
-#include "move.h"
+#include "place.h"
 
-
-/* ALGORITHM:
- * Get player command
- * Update Timmy's position
- * Teleport Timmy if he is now beyond bounds
- * Draw Timmy
- * Return character
- *
- * Status: FINISHED
- */
-char move(int* x, int* y)
-    /* Gets input from player updates the motes position and moves 
-     * the mote accordingly
-     * Given: pointers to the position of the mote
-     * Returns: command entered */
+void teleport(int* xTim, int* yTim,
+              int xSnek, int ySnek,
+              int xJuju, int yJuju)
 {
-    char ch = getchar();
+    int xNew = 0, yNew = 0;
 
-    // Clear Timmy's current position
-    draw_symbol(*x, *y, ' ');
+    // Select a random point that is not on any row
+    // or column as any of the game objects
+    do {
+        place(&xNew, &yNew);
+    } while(xNew == *xTim || yNew == *yTim ||
+            xNew == xSnek || yNew == ySnek ||
+            xNew == xJuju || yNew == yJuju);
 
-    switch(ch) //update Timmy's position (via pointer)
-    {
-        case 'w': //up
-        case 'i':
-            (*y)--;
-            if(*y < 0) *y = HEIGHT - 1;
-            break;
+    int i, j;
+    for() {
 
-        case 's': //down
-        case 'k':
-            (*y)++;
-            if(*y >= HEIGHT) *y = 0;
-            break;
 
-        case 'a': //left
-        case 'j':
-            (*x)--;
-            if(*x < 0) *x = WIDTH - 1;
-            break;
-
-        case 'd': //right
-        case 'l':
-            (*x)++;
-            if(*x >= WIDTH) *x = 0;
-            break;
     }
 
-    draw_symbol(*x ,*y, TIMMY); //display Timmy's position
-    return ch;
-}
 
+}
