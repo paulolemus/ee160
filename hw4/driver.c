@@ -5,10 +5,10 @@
  * date    : 4/16/2017
  * team    : AMERICA
  * members : Paulo L, Kevin L, Christopher A
-*/
+ */
 
 /* This is the main driver for the gsnake game.
- */
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,6 +18,7 @@
 #include "move.h"
 #include "place.h"
 #include "attack.h"
+#include "portal.h"
 
 int main()
 {
@@ -28,7 +29,7 @@ int main()
     int xSnek, ySnek;           // Snek! (the Mook)
     int xJuju, yJuju;           // Juju!
     int state = ALIVE;          // Timmy starts alive, duh
-    int score = 0;              // Score goes up with each Juju
+    int score = 27;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
 
@@ -102,19 +103,26 @@ int main()
             } while(xJuju == xTim || xJuju == xSnek || 
                     yJuju == yTim || yJuju == ySnek);
             draw_symbol(xJuju, yJuju, JUJU);
-
-            if(score >= 25) debug_wds(8, text[8]);
         }
-
+        if(score >= 29) {//1 point away from winning
+            debug_wds(8, text[8]);
+            portal_print(xJuju,yJuju); //spawns portal around Juju
+            draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
+        }
+        if(score == 30) { //beats the game!
+            state = SURVIVOR;
+            break;
+        }
         // Update counters || Strings
+        draw_symbol(xTim, yTim, TIMMY);
         display_pos(xTim, yTim);
         display_score(score);
         debug_wds(10, text[10]);
     }
 
-	clear_screen();
+    clear_screen();
     if(state == DEAD)       printf("Timmy has tragically died in College\n");
     else if(state == ALIVE) printf("Bro you totally quit. No props...\n");
     else                    printf("You da man Timmy. You are a SURVIVOR OF COLLEGE\n");
-	return 0;
+    return 0;
 }
