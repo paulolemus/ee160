@@ -11,6 +11,10 @@
  * "Teleport is a somewhat hidden feature, in that
  * we do not tell you there is a limit or what button
  * you need to press.
+ *
+ * The game goes through easy, medium, and hard modes
+ * as you collect more and more Jujus Before the portal
+ * opens up.
 */
 
 #include <stdio.h>
@@ -33,7 +37,7 @@ int main()
     int xSnek, ySnek;           // Snek! (the Mook)
     int xJuju, yJuju;           // Juju!
     int state = ALIVE;          // Timmy starts alive, duh
-    int score = 23;              // Score goes up with each Juju
+    int score = 0;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
     int teleports = 0;          // teleportation counter
