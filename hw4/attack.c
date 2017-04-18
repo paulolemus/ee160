@@ -34,7 +34,11 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
     int diffy  = my - *ay;
     int select = rand() % 5;
 
-    if(select == 0 || select == 2) {
+    // snek will occasionally not move
+    if(select == 0) {
+        // Do not move
+    }
+    else if(select % 2 == 0) {
 
         if(diffx > 0) *ax = *ax + 1;
         else if(diffx < 0) *ax = *ax - 1;
@@ -43,7 +47,7 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
             else if(diffy < 0) *ay = *ay - 1;
         }
     }
-    else if(select == 1 || select == 3) {
+    else if(select % 2 == 1) {
 
         if(diffy > 0) *ay = *ay + 1;
         else if(diffy < 0) *ay = *ay - 1;
@@ -51,9 +55,6 @@ int attack_easy(int mx, int my, int* ax, int* ay) {
             if(diffx > 0) *ax = *ax + 1;
             else if(diffx < 0) *ax = *ax - 1;
         }
-    }
-    else {
-        // Do nothing
     }
 
     // Draw the snek

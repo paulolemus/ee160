@@ -21,6 +21,7 @@
 
 int main()
 {
+    // Seed the rand function once at beginning of game
     srand(time(NULL));
 
     int xTim,  yTim;            // Timmy!
@@ -31,18 +32,37 @@ int main()
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
 
-    place(&xTim, &yTim); // place Timmy somewhere random to start
+    // place Timmy somewhere random to start
+    place(&xTim, &yTim); 
     // Place snek and Juju somewhere NOT on Timmy's axes.
     do place(&xSnek, &ySnek); while(xSnek == xTim || ySnek == yTim);
     do place(&xJuju, &yJuju); while(xJuju == xTim || yJuju == yTim);
 
-    // Draw everything to screen
-    draw_map();
+    // All the text we display to the screen
+    char* warnings[3];
+    warnings[EASY_MODE] = "\"The creature is annoyed but sleepy...\"";
+    warnings[MEDIUM_MODE] = "\"Its chasing me through walls!\"";
+    warnings[HARD_MODE] = "\"Is it blocking that Juju?!?\"";
 
+    char* text[12];
+    text[2] = "I wanna go home!";
+    text[4] = "o - Timmy";
+    text[5] = "$ - Juju";
+    text[6] = "M - Mook";
+    text[8] = "A portal! My way home!";
+    text[10] = warnings[difficulty];
+
+
+    // Draw everything to screen once prior while loop
+    draw_map();
     draw_symbol(xTim,  yTim,  TIMMY);
     draw_symbol(xJuju, yJuju, JUJU);
     draw_symbol(xSnek, ySnek, MOOK);
-
+    debug_wds(2, text[2]);
+    debug_wds(4, text[4]);
+    debug_wds(5, text[5]);
+    debug_wds(6, text[6]);
+    debug_wds(10, text[10]);
     display_pos(xTim, yTim);
     display_score(score);
 
@@ -61,11 +81,17 @@ int main()
         }
         else if(difficulty == MEDIUM_MODE) {
             state = attack_medium(xTim, yTim, &xSnek, &ySnek);
-            if(score > 20) difficulty = HARD_MODE;
+            if(score >= 20) {
+                difficulty = HARD_MODE;
+                text[10] = warnings[difficulty];
+            }
         }
         else {
             state = attack_easy(xTim, yTim, &xSnek, &ySnek);
-            if(score > 10) difficulty = MEDIUM_MODE;
+            if(score >= 10) {
+                difficulty = MEDIUM_MODE;
+                text[10] = warnings[difficulty];
+            }
         }
 
         // Juju logic
@@ -76,15 +102,19 @@ int main()
             } while(xJuju == xTim || xJuju == xSnek || 
                     yJuju == yTim || yJuju == ySnek);
             draw_symbol(xJuju, yJuju, JUJU);
+
+            if(score >= 25) debug_wds(8, text[8]);
         }
 
         // Update counters || Strings
         display_pos(xTim, yTim);
         display_score(score);
+        debug_wds(10, text[10]);
     }
 
 	clear_screen();
-    if(state == DEAD) printf("Timmy has tragically died in College\n");
-    else              printf("You da man Timmy. You are a SURVIVOR OF COLLEGE\n");
+    if(state == DEAD)       printf("Timmy has tragically died in College\n");
+    else if(state == ALIVE) printf("Bro you totally quit. No props...\n");
+    else                    printf("You da man Timmy. You are a SURVIVOR OF COLLEGE\n");
 	return 0;
 }
