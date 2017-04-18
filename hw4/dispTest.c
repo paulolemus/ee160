@@ -1,21 +1,23 @@
 /*
-file: dispTest.c
-by: Kevin Liu
-login: liukevin
-date: 03/25/17
-team: AMERICA
-members: Paulo, Christopher, Kevin
+ * file: dispTest.c
+ * by: Kevin Liu
+ * login: liukevin
+ * date: 03/25/17
+ * team: AMERICA
+ * members: Paulo, Christopher, Kevin
 */
 
-/* Test file for display module */
+/* Test file for display module
+ *
+ * Status: FINISHED
+ */
 
 #include <stdio.h>
 #include "display.h"
 
 int main()
 {
-    int row, column;
-    row = column = 5;
+    int row = 5, column = 5;
 	draw_map();
 
     display_pos(-99,-99);
@@ -30,13 +32,12 @@ int main()
         //}
         else //in between top and bottom lines
         {
-            draw_symbol(row,5,'x');
-            draw_symbol(row,11,'x');
+            draw_symbol(row, 5, 'x');
+            draw_symbol(row, 11, 'x');
         }
     }
+
     getchar();//so it doesn't close on you right away 
-
 	clear_screen();
-
 	return 0;
 }

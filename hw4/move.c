@@ -1,57 +1,64 @@
 /*
-file: move.c
-by: Kevin Liu
-login: liukevin
-date: 04/12/17
-team: AMERICA
-members: Paulo, Chris, Kevin
+file    : move.c
+by      : Kevin Liu
+login   : liukevin
+date    : 04/12/17
+team    : AMERICA
+members : Paulo, Chris, Kevin
 */
 #include <stdio.h>
 #include "display.h"
 #include "move.h"
 
-char move(int *x, int *y)
-    /* Gets input from player updates the motes posistion and moves 
+
+/* ALGORITHM:
+ * Get player command
+ * Update Timmy's position
+ * Teleport Timmy if he is now beyond bounds
+ * Draw Timmy
+ * Return character
+ *
+ * Status: FINISHED
+ */
+char move(int* x, int* y)
+    /* Gets input from player updates the motes position and moves 
      * the mote accordingly
      * Given: pointers to the position of the mote
      * Returns: command entered */
 {
-    char ch;
+    char ch = getchar();
 
-    while((ch = getchar()) != 'q')
+    // Clear Timmy's current position
+    draw_symbol(*x, *y, ' ');
+
+    switch(ch) //update Timmy's position (via pointer)
     {
-        draw_symbol(*x,*y,' '); //remove Timmy from current position
-        switch(ch) //update Timmy's position (via pointer)
-        {
-            case 'w': //up
-            case 'k':
-                (*y)--;
-                break;
-            case 's': //down
-            case 'j':
-                (*y)++;
-                break;
-            case 'a': //left
-            case 'h':
-                (*x)--;
-                break;
-            case 'd': //right
-            case 'l':
-                (*x)++;
-                break;
-        }
+        case 'w': //up
+        case 'i':
+            (*y)--;
+            if(*y < 0) *y = HEIGHT - 1;
+            break;
 
-        /*  reset position back to grid  */
-        if(*x < 0)
-            *x = *x +40;
-        if(*y < 0)
-            *y = *y + 40;
-        *x = *x % 40;
-        *y = *y % 20;
+        case 's': //down
+        case 'k':
+            (*y)++;
+            if(*y >= HEIGHT) *y = 0;
+            break;
 
-        draw_symbol(*x,*y,TIMMY); //display Timmy's position
-        display_pos(*x,*y);
+        case 'a': //left
+        case 'j':
+            (*x)--;
+            if(*x < 0) *x = WIDTH - 1;
+            break;
+
+        case 'd': //right
+        case 'l':
+            (*x)++;
+            if(*x >= WIDTH) *x = 0;
+            break;
     }
+
+    draw_symbol(*x ,*y, TIMMY); //display Timmy's position
     return ch;
 }
 

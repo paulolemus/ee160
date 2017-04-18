@@ -8,8 +8,8 @@
 */
 
 #include <stdlib.h>
-#include "display.h"
 #include "attack.h"
+#include "display.h"
 
 
 /* Updates the position of the attacker to move towards the mote.

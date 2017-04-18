@@ -18,10 +18,9 @@ int main() {
 
     srand(time(NULL));
 
-    int timX  = 0;
-    int timY  = 0;
-    int snekX = 0;
-    int snekY = 0;
+    int timX  = 0, timY  = 0;
+    int snekX = 0, snekY = 0;
+
     char cmd  = 'v'; // random
     char diff = 'e'; // Difficulty of snek
     int state;

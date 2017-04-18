@@ -1,7 +1,7 @@
 /*
  * file     : place.h
- * by       :
- * login    :
+ * by       : Everyone
+ * login    : plemus, liukevin, camendol
  * date     : 4/12/2017
  * team     : AMERICA
  * members  : Paulo L, Kevin L, Christopher A

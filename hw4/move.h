@@ -1,10 +1,10 @@
 /*
- * file: move.h
- * by:
- * login:
- * date:
- * team:
- * members:
+ * file     : move.h
+ * by       : Paulo Lemus
+ * login:   : Plemus
+ * date     : 4/17/2017
+ * team     : AMERICA
+ * members  : Paulo L, Christopher A, Kevin L
 */
 
 #ifndef EE_HW4_MOVE_H_
