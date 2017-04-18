@@ -139,39 +139,119 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
     draw_symbol(*ax, *ay, ' ');
 
     int horizontal = 0, vertical = 0;
-    int xTimToJuju, yTimToJuju;
-    int xSnekToJuju, ySnekToJuju;
-    int xDiff, yDiff;
 
-    // Calculate Tim's distance to Juju
-    xTimToJuju = jx - mx;
-    xDiff = (jx + WIDTH) - mx;
-    xTimToJuju = (abs(xDiff) < abs(xTimToJuju)) ? xDiff: xTimToJuju;
-    xDiff = (jx - WIDTH) - mx;
-    xTimToJuju = (abs(xDiff) < abs(xTimToJuju)) ? xDiff: xTimToJuju;
-    yTimToJuju = jy - my;
-    yDiff = (jy + HEIGHT) - my;
-    yTimToJuju = (abs(yDiff) < abs(yTimToJuju)) ? yDiff: yTimToJuju;
-    yDiff = (jy - HEIGHT) - my;
-    yTimToJuju = (abs(yDiff) < abs(yTimToJuju)) ? yDiff: yTimToJuju;
+    int xTemp, yTemp;
+    int xJuju = jx, yJuju = jy;
+   
+    /*
+    // Determine coordinates of closest Juju.
+    xTemp = jx + WIDTH;
+    yTemp = jy + HEIGHT;
+    if(abs(xJuju - mx) < abs(xTemp - mx)) xJuju = xTemp;
+    if(abs(yJuju - my) < abs(yTemp - my)) yJuju = yTemp;
+    xTemp = jx - WIDTH;
+    yTemp = jy - HEIGHT;
+    if(abs(xJuju - mx) < abs(xTemp - mx)) xJuju = xTemp;
+    if(abs(yJuju - my) < abs(yTemp - my)) yJuju = yTemp;
+    */
 
-    // Calculate Tim's distance to Juju
-    xSnekToJuju = jx - *ax;
-    xDiff = (jx + WIDTH) - *ax;
-    xSnekToJuju = (abs(xDiff) < abs(xSnekToJuju)) ? xDiff: xSnekToJuju;
-    xDiff = (jx - WIDTH) - *ax;
-    xSnekToJuju = (abs(xDiff) < abs(xSnekToJuju)) ? xDiff: xSnekToJuju;
-    ySnekToJuju = jy - *ay;
-    yDiff = (jy + HEIGHT) - *ay;
-    ySnekToJuju = (abs(yDiff) < abs(ySnekToJuju)) ? yDiff: ySnekToJuju;
-    yDiff = (jy - HEIGHT) - *ay;
-    ySnekToJuju = (abs(yDiff) < abs(ySnekToJuju)) ? yDiff: ySnekToJuju;
+    // Find midpoint and slope of line connecting nearest Juju and Timmy
+    int xMidEst = (mx + xJuju) / 2;
+    int yMidEst = (my + yJuju) / 2;
+    float slope = (mx - xJuju) * 1.0f / (my - yJuju);
+    if(xMidEst >= WIDTH)  xMidEst -= WIDTH;
+    else if(xMidEst < 0)  xMidEst += WIDTH;
+    if(yMidEst >= HEIGHT) yMidEst -= HEIGHT;
+    else if(yMidEst < 0)  yMidEst += HEIGHT;
     
+    // Determine if the snek is close to the line
+    int closeToLine = 0;
+    int i;
+    for(i = 0; i < WIDTH / 4; ++i)
+    {
+        // Check if snek is close in one direction
+        int xLine = xMidEst + i;
+        if(xLine >= WIDTH) xLine = xLine - WIDTH;
+        int yLine = yMidEst + slope * (xLine - xMidEst);
+        int distance = abs(*ax - xLine) + abs(*ay - yLine);
 
+        if(distance < 3) closeToLine = 1;
 
-    // Move snek only one direction towards Timmy
-    // with a random priority in either direction 
-    // possible.
+        // Check if snek is close in other direction
+        xLine = xMidEst - i;
+        if(xLine < 0) xLine = xLine + WIDTH;
+        yLine = yMidEst + slope * (xLine - xMidEst);
+        distance = abs(*ax - xLine) + abs(*ay - yLine);
+
+        if(distance < 3) closeToLine = 1;
+    }
+
+    // If snek is close to line, attack Timmy.
+    // Otherwise, move towards the middle of the line
+    if(closeToLine) {
+
+        // Attack Timmy!
+        int xShort  = mx - *ax;
+        int xDiff   = (mx - WIDTH) - *ax;
+        xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+        xDiff  = (mx + WIDTH) - *ax;
+        xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+
+        int yShort  = my - *ay;
+        int yDiff   = (my - HEIGHT) - *ay;
+        yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+        yDiff  = (my + HEIGHT) - *ay;
+        yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+       
+        if(xShort < 0)      horizontal = -1;
+        else if(xShort > 0) horizontal = 1;
+        if(yShort < 0)      vertical   = -1;
+        else if(yShort > 0) vertical   = 1;
+
+    }
+    else if(abs(xJuju - *ax) + abs(yJuju - *ay) < 4) {
+
+        // Move towards midpoint
+        int xShort  = xMidEst - *ax;
+        int xDiff   = (xMidEst - WIDTH) - *ax;
+        xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+        xDiff  = (xMidEst + WIDTH) - *ax;
+        xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+
+        int yShort  = yMidEst - *ay;
+        int yDiff   = (yMidEst - HEIGHT) - *ay;
+        yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+        yDiff  = (yMidEst + HEIGHT) - *ay;
+        yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+       
+        if(xShort < 0)      horizontal = -1;
+        else if(xShort > 0) horizontal = 1;
+        if(yShort < 0)      vertical   = -1;
+        else if(yShort > 0) vertical   = 1;
+
+    }
+    else {
+        
+        // Defend Juju
+        int xShort  = xJuju - *ax;
+        int xDiff   = (xJuju - WIDTH) - *ax;
+        xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+        xDiff  = (xJuju + WIDTH) - *ax;
+        xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
+
+        int yShort  = yJuju - *ay;
+        int yDiff   = (yJuju - HEIGHT) - *ay;
+        yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+        yDiff  = (yJuju + HEIGHT) - *ay;
+        yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
+       
+        if(xShort < 0)      horizontal = -1;
+        else if(xShort > 0) horizontal = 1;
+        if(yShort < 0)      vertical   = -1;
+        else if(yShort > 0) vertical   = 1;
+    }
+
+    // Move snek
     int select = rand() % 2;
     if(select) {
         if(horizontal != 0) *ax = *ax + horizontal;

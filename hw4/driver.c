@@ -28,7 +28,7 @@ int main()
     int xSnek, ySnek;           // Snek! (the Mook)
     int xJuju, yJuju;           // Juju!
     int state = ALIVE;          // Timmy starts alive, duh
-    int score = 0;              // Score goes up with each Juju
+    int score = 27;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
 
