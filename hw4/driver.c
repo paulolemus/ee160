@@ -134,7 +134,8 @@ int main()
         {//1 point away from winning
             debug_wds(8, text[8]);
             portal_print(xJuju, yJuju); //spawns portal around Juju
-            draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
+            draw_symbol(xTim,  yTim,  TIMMY); // draws Timmy over portal
+            draw_symbol(xSnek, ySnek, MOOK); // draws Snek over portal
         }
 
         if(score == 14) 

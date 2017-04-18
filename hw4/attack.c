@@ -155,28 +155,35 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
     // Determine if the snek is close to the line
     int closeToLine = 0;
     int i;
-    for(i = 0; i < WIDTH / 4; ++i)
+    for(i = 0; i < WIDTH / 5; ++i)
     {
         // Check if snek is close in one direction
         int xLine = xMidEst + i;
         if(xLine >= WIDTH) xLine = xLine - WIDTH;
         int yLine = yMidEst + slope * (xLine - xMidEst);
+        if(yLine >= HEIGHT) yLine -= HEIGHT;
+        else if(yLine < 0)  yLine += HEIGHT;
         int distance = abs(*ax - xLine) + abs(*ay - yLine);
 
-        if(distance < 2) closeToLine = 1;
+        if(distance < 3) closeToLine = 1;
 
         // Check if snek is close in other direction
         xLine = xMidEst - i;
         if(xLine < 0) xLine = xLine + WIDTH;
         yLine = yMidEst + slope * (xLine - xMidEst);
+        if(yLine >= HEIGHT) yLine -= HEIGHT;
+        else if(yLine < 0)  yLine += HEIGHT;
         distance = abs(*ax - xLine) + abs(*ay - yLine);
 
-        if(distance < 2) closeToLine = 1;
+        if(distance < 3) closeToLine = 1;
     }
 
     // If snek is close to line, attack Timmy.
     // Otherwise, move towards the middle of the line
-    if(closeToLine) {
+    int delTimSnek = 
+        abs(abs(mx - jx) + abs(my - jy) - abs(*ax - jx) - abs(*ay - jy));
+
+    if(closeToLine && delTimSnek > 1) {
 
         // Attack Timmy!
         int xShort  = mx - *ax;
@@ -227,8 +234,8 @@ int attack_hard(int mx, int my, int jx, int jy, int* ax, int* ay) {
         xDiff  = (xJuju + WIDTH) - *ax;
         xShort = (abs(xDiff) < abs(xShort)) ? xDiff : xShort;
 
-        int yShort  = yJuju - *ay;
-        int yDiff   = (yJuju - HEIGHT) - *ay;
+        int yShort = yJuju - *ay;
+        int yDiff  = (yJuju - HEIGHT) - *ay;
         yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;
         yDiff  = (yJuju + HEIGHT) - *ay;
         yShort = (abs(yDiff) < abs(yShort)) ? yDiff : yShort;

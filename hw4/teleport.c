@@ -12,7 +12,7 @@ members : Paulo, Chris, Kevin
 #include "display.h"
 #include "place.h"
 
-#define SLEEP_TIME 5000
+#define SLEEP_TIME 10000
 
 
 /* Teleport the player to a random location
@@ -62,7 +62,7 @@ void teleport(int* xTim, int* yTim,
                 draw_symbol(j, k, ' ');
             }
         }
-        // Sleep for 5 milliseconds so we can see animation
+        // Sleep for 10 milliseconds so we can see animation
         usleep(SLEEP_TIME);
     }
     // Set timmy's position to the updated location
