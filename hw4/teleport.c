@@ -14,6 +14,10 @@ members : Paulo, Chris, Kevin
 
 #define SLEEP_TIME 5000
 
+
+/* Teleport the player to a random location
+ * on the map.
+ */
 void teleport(int* xTim, int* yTim,
               int xSnek, int ySnek,
               int xJuju, int yJuju)
