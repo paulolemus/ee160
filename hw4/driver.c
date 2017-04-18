@@ -8,6 +8,9 @@
  */
 
 /* This is the main driver for the gsnake game.
+ * "Teleport is a somewhat hidden feature, in that
+ * we do not tell you there is a limit or what button
+ * you need to press.
 */
 
 #include <stdio.h>
@@ -19,7 +22,7 @@
 #include "place.h"
 #include "attack.h"
 #include "portal.h"
-//#include "teleport.h"
+#include "teleport.h"
 
 int main()
 {
@@ -30,7 +33,7 @@ int main()
     int xSnek, ySnek;           // Snek! (the Mook)
     int xJuju, yJuju;           // Juju!
     int state = ALIVE;          // Timmy starts alive, duh
-    int score = 0;              // Score goes up with each Juju
+    int score = 23;              // Score goes up with each Juju
     char cmd  = 'v';            // Store user input
     int difficulty = EASY_MODE; // Game starts in easy mode
     int teleports = 0;          // teleportation counter
@@ -119,17 +122,17 @@ int main()
         if(cmd == ' ' && teleports < 3) 
         {
             teleports++;
-            //teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
+            teleport(&xTim, &yTim, xSnek, ySnek, xJuju, yJuju);
         }
 
-        if(score >= 29) 
+        if(score >= 24) 
         {//1 point away from winning
             debug_wds(8, text[8]);
             portal_print(xJuju, yJuju); //spawns portal around Juju
             draw_symbol(xTim, yTim, TIMMY); //draws Timmy over border of portal
         }
 
-        if(score == 30) 
+        if(score == 25) 
         { //beats the game!
             state = SURVIVOR;
         }

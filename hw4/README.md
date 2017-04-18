@@ -3,6 +3,3 @@
 Members: Paulo L, Christopher A, Kevin L
 Date: 4/12/2017
 
-# Modules
-
-DO NOT EDIT DISPLAY.H !!!
