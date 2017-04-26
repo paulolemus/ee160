@@ -2,6 +2,7 @@
 *
 # Unignore:
 !makefile
+!Makefile
 !make
 !*/
 !*.h
