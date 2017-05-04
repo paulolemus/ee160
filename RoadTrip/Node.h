@@ -12,7 +12,7 @@
 #define AMERICA_NODE_H_
 
 enum City {
-    ERROR = -1,
+    CITY_ERROR = -1,
     SAN_FRAN,
     LAS_VEGAS,
     TUSCON,
@@ -24,11 +24,11 @@ enum City {
 };
 
 struct Node {
-    City         city;
+    enum City    city;
     double       edge;
     struct Node* next;
 };
 
-int 
+enum City getEnum(const char* cityStr);
 
 #endif // AMERICA_NODE_H_
