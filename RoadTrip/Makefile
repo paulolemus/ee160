@@ -4,6 +4,9 @@ CFLAGS = -Wall -Wextra -g
 
 all: RoadTrip
 
+run: RoadTrip
+	./RoadTrip
+
 RoadTrip: fileIO.o Node.o pathplanning.o RoadTrip.c
 
 pathplanning.o: pathplanning.h
