@@ -31,19 +31,42 @@ int main() {
     struct Node* shortPath = shortestPath(adjList, START, GOAL);
     struct Node* longPath  = longestPath (adjList, START, GOAL);
 
-    // Display all path information
-    printf("The Shortest Path is:\n");
+    // Display short path information
+    printf("----------short path information----------\n");
     if(shortPath == NULL) {
-        printf("There is no path to destination\n");
+        printf("Unfortunately, there are no paths from %s to %s\n\n",
+               getCity(START), getCity(GOAL));
     }
     else {
+        printf("Path: ");
         struct Node* currNode = shortPath;
+        int distance = 0;
         while(currNode) {
+            if(currNode->edge >= 0) distance += currNode->edge;
             printf("%s ", getCity(currNode->city));
             currNode = currNode->next;
             if(currNode) printf("-> ");
         }
-        printf("\n");
+        printf("\nDistance: %dmi\n\n", distance);
+    }
+
+    // Display long path information
+    printf("----------long path information----------\n");
+    if(longPath == NULL) {
+        printf("Unfortunately, there are no paths from %s to %s\n\n",
+               getCity(START), getCity(GOAL));
+    }
+    else {
+        printf("Path: ");
+        struct Node* currNode = longPath;
+        int distance = 0;
+        while(currNode) {
+            if(currNode->edge >= 0) distance += currNode->edge;
+            printf("%s ", getCity(currNode->city));
+            currNode = currNode->next;
+            if(currNode) printf("-> ");
+        }
+        printf("\nDistance: %dmi\n\n", distance);
     }
     return 0;
 }

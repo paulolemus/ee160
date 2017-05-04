@@ -206,7 +206,7 @@ struct Node* longestPath(struct Node** adjList, enum City start, enum City goal)
             bestPath = newNode();
             bestPath->city = adjList[start]->city;
             bestPath->edge = adjList[start]->edge;
-            bestPath->next = pathsList[shortIndex];
+            bestPath->next = pathsList[maxIndex];
         }
         // Clean up and return
         for(int i = 0; i < childrenCount; ++i) {
