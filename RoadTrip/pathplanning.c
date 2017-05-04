@@ -14,7 +14,7 @@ struct Node* longestPath(struct Node** adjList, int listsize, enum City start, e
     /* declare start and potential paths variables */
     struct Node* currNode = adjList[start];
     struct Node** potPaths[7];
-    struct Node* bestNode = adjList[start];
+    struct Node* bestPath = adjList[start];
 
     /* guard list */
     if(currNode->city == goal)
@@ -24,14 +24,14 @@ struct Node* longestPath(struct Node** adjList, int listsize, enum City start, e
 
     /* initialize potential paths */
     for(int i = 0; i < 7; i++)
-        potPaths[i] = 0;
+        potPaths[i] = NULL;
 
     /* get potential paths */
     while(currNode->next != NULL)
     {
         currNode = currNode->next;
-        potPaths[currNode->city] = 
-            longestPath(adjList, listsize, enum City currNode->city, goal);
+        potPaths[getEnum(currNode->city)] = 
+            longestPath(adjList, listsize, getEnum(currNode->city), goal);
     }
 
     /* path computation */
@@ -45,14 +45,13 @@ struct Node* longestPath(struct Node** adjList, int listsize, enum City start, e
         }
     }
 
-    /* finds longest index */
+    /* finds longest path index */
     for(int i = 0; i < 7; i++)
     {
-        if(bestNode->edge < potPaths[i])
-            bestNode = potPaths[i];
+        if(bestPath->edge < potPaths[i])
+            bestPath = potPaths[i];
     }
 
-    /* stop when reached New York */
-    if(City == GOAL)
-        return;
+    /* return longest path index */
+    return bestPath;
 }
