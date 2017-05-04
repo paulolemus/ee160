@@ -18,4 +18,4 @@ Node.o: Node.h
 clean: build-clean
 
 build-clean:
-	-rm *.o
+	-rm *.o RoadTrip

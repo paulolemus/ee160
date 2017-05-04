@@ -25,10 +25,15 @@ enum City {
 
 struct Node {
     enum City    city;
-    double       edge;
+    int          edge;
     struct Node* next;
 };
 
+// Node functions
+struct Node* newNode();
+void deleteList(struct Node* nodePtr);
+
+// Enum functions
 enum City getEnum(const char* cityStr);
 
 #endif // AMERICA_NODE_H_

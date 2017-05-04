@@ -4,8 +4,30 @@
  * Team:
  */
 
+#include <stdlib.h>
 #include <string.h>
 #include "Node.h"
+
+struct Node* newNode() {
+    struct Node* nodePtr = malloc(sizeof(struct Node));
+    nodePtr->city = CITY_ERROR;
+    nodePtr->edge = -1;
+    nodePtr->next = NULL;
+    return nodePtr;
+}
+
+void deleteList(struct Node* nodePtr) {
+
+    struct Node* nextPtr;
+    if(nodePtr == NULL);
+    else {
+        do {
+            nextPtr = nodePtr->next;
+            free(nodePtr);
+            nodePtr = nextPtr;
+        } while(nodePtr != NULL);
+    }
+}
 
 enum City getEnum(const char* cityStr) {
 
