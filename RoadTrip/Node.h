@@ -13,14 +13,14 @@
 
 enum City {
     CITY_ERROR = -1,
-    SAN_FRAN,
-    LAS_VEGAS,
-    TUSCON,
-    SALT_LAKE,
-    CHICAGO,
-    NASHVILLE,
-    INDIANAPOLIS,
-    NEW_YORK
+    SAN_FRAN = 0,
+    LAS_VEGAS = 1,
+    TUSCON = 2,
+    SALT_LAKE = 3,
+    CHICAGO = 4,
+    NASHVILLE = 5,
+    INDIANAPOLIS = 6,
+    NEW_YORK = 7
 };
 
 struct Node {
