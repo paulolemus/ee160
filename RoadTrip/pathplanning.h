@@ -13,6 +13,9 @@
 
 #include "Node.h"
 
+static const char* START = "san_francisco";
+static const char* GOAL  = "new_york";
+
 /*
  *
  */

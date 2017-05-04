@@ -11,5 +11,24 @@
 #ifndef AMERICA_NODE_H_
 #define AMERICA_NODE_H_
 
+enum City {
+    ERROR = -1,
+    SAN_FRAN,
+    LAS_VEGAS,
+    TUSCON,
+    SALT_LAKE,
+    CHICAGO,
+    NASHVILLE,
+    INDIANAPOLIS,
+    NEW_YORK
+};
+
+struct Node {
+    City         city;
+    double       edge;
+    struct Node* next;
+};
+
+int 
 
 #endif // AMERICA_NODE_H_
