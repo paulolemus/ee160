@@ -4,7 +4,9 @@
  * Team: AMERICA
  */
 
-/*
+/* The purpose of all the functions in this file are to
+ * read in all information from text files and to populate 
+ * a data structure with the information.
  *
  */
 

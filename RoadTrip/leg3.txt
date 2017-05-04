@@ -1,0 +1,3 @@
+chicago new_york 790
+nashville new_york 884
+indianapolis new_york 709

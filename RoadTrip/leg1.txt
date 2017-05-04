@@ -1,0 +1,3 @@
+san_francisco las_vegas 564
+san_francisco tuscon 869
+san_francisco salt_lake_city 736
