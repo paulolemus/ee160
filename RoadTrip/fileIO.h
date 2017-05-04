@@ -24,6 +24,6 @@ static const char* file3 = "leg3.txt";
  * This function will read in data from the three data files
  * and populate a list with the corresponding information
  */
-struct Node** parseGraph();
+struct Node** parseGraph(int listSize);
 
 #endif // AMERICA_FILEIO_H_

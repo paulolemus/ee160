@@ -1,9 +1,9 @@
 las_vegas chicago 1752
-tucson chicago 1744
+tuscon chicago 1744
 salt_lake_city chicago 1399
 las_vegas nashville 1787
-tucson nashville 1614
+tuscon nashville 1614
 salt_lake_city nashville 1628
 las_vegas indianapolis 1834
-tucson indianapolis 1689
+tuscon indianapolis 1689
 salt_lake_city indianapolis 1538

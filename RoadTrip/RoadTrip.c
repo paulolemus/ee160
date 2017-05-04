@@ -13,8 +13,8 @@
 
 int main() {
 
-    int listSize;
-    struct Node** adjList = parseGraph(&listSize);
+    int listSize = 8;
+    struct Node** adjList = parseGraph(listSize);
 
     /*
     int index = 0;
