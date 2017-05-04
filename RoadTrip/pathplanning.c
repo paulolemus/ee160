@@ -110,10 +110,12 @@ struct Node* shortestPath(struct Node** adjList, enum City start, enum City goal
         struct Node* bestPath = NULL;
         if(shortIndex < 0);
         else {
-            bestPath = newNode();
-            bestPath->city = adjList[start]->city;
-            bestPath->edge = adjList[start]->edge;
+            currNode = adjList[start];
+            while(currNode->next->city != pathsList[shortIndex]->city) currNode = currNode->next;
+            bestPath       = newNode();
             bestPath->next = pathsList[shortIndex];
+            bestPath->city = adjList[start]->city;
+            bestPath->edge = currNode->edge;
         }
         // Clean up and return
         for(int i = 0; i < childrenCount; ++i) {
@@ -203,9 +205,11 @@ struct Node* longestPath(struct Node** adjList, enum City start, enum City goal)
         struct Node* bestPath = NULL;
         if(maxIndex < 0);
         else {
-            bestPath = newNode();
+            currNode = adjList[start];
+            while(currNode->next->city != pathsList[maxIndex]->city) currNode = currNode->next;
+            bestPath       = newNode();
             bestPath->city = adjList[start]->city;
-            bestPath->edge = adjList[start]->edge;
+            bestPath->edge = currNode->edge;
             bestPath->next = pathsList[maxIndex];
         }
         // Clean up and return

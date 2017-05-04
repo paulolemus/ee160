@@ -31,6 +31,7 @@ int main() {
     struct Node* shortPath = shortestPath(adjList, START, GOAL);
     struct Node* longPath  = longestPath (adjList, START, GOAL);
 
+
     // Display short path information
     printf("----------short path information----------\n");
     if(shortPath == NULL) {
