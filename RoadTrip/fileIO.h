@@ -14,15 +14,16 @@
 
 #include "Node.h"
 
-static const char* file1 = "leg1.txt";
-static const char* file2 = "leg2.txt";
-static const char* file3 = "leg3.txt";
+// File names. They are defined in Node.c
+extern const char* file1;
+extern const char* file2;
+extern const char* file3;
 
 
 /* parseGraph:
  *
  * This function will read in data from the three data files
- * and populate a list with the corresponding information
+ * and create an adjacency list from the node information.
  */
 struct Node** parseGraph(int listSize);
 

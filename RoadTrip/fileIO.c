@@ -8,6 +8,10 @@
 #include <stdio.h>
 #include "fileIO.h"
 
+const char* file1 = "leg1.txt";
+const char* file2 = "leg2.txt";
+const char* file3 = "leg3.txt";
+
 struct Node** parseGraph(int listSize) {
 
     // Ensure that all files can be opened
@@ -25,26 +29,24 @@ struct Node** parseGraph(int listSize) {
         exit(1);
     }
 
-    // Create the list of adjacency lists, initialize each index to null
+    // Create the list of adjacency lists and initialize to NULL
     struct Node** adjList = malloc(listSize * sizeof(struct Node*));
-    for(unsigned int i = 0; i < listSize; ++i) adjList[i] = NULL;
+    for(int i = 0; i < listSize; ++i) adjList[i] = NULL;
+
 
     char startCity[20];
     char endCity[20];
     int  edgeWeight;
 
-    // Scan in all information for fptr1
+    // This loop scans in all data from the dat file and uses it to
+    // create adjacency lists that are pushed into a global adjacency list.
     while(fscanf(fptr1, "%s %s %d", startCity, endCity, &edgeWeight) == 3) {
 
-        printf("Scanned in line for fptr1\n");
         int startIndex = getEnum(startCity);
         int endIndex   = getEnum(endCity);
-        printf("startIndex : %d\n", startIndex);
-        printf("endIndex   : %d\n", endIndex);
 
         // If the start node has never been created before
         if(adjList[startIndex] == NULL) {
-            printf("entered list is empty\n");
 
             struct Node* currNode = newNode();
             struct Node* nextNode = newNode();
@@ -56,7 +58,6 @@ struct Node** parseGraph(int listSize) {
         }
         // Append the new node at the end of the existing list
         else {
-            printf("appending to end\n");
             struct Node* currNode = adjList[startIndex];
             struct Node* nextNode = newNode();
             nextNode->city = endIndex;
@@ -70,15 +71,11 @@ struct Node** parseGraph(int listSize) {
     // Scan in all information for fptr2
     while(fscanf(fptr2, "%s %s %d", startCity, endCity, &edgeWeight) == 3) {
 
-        printf("Scanned in line for fptr2\n");
         int startIndex = getEnum(startCity);
         int endIndex   = getEnum(endCity);
-        printf("startIndex : %d\n", startIndex);
-        printf("endIndex   : %d\n", endIndex);
 
         // If the start node has never been created before
         if(adjList[startIndex] == NULL) {
-            printf("entered list is empty\n");
 
             struct Node* currNode = newNode();
             struct Node* nextNode = newNode();
@@ -90,7 +87,6 @@ struct Node** parseGraph(int listSize) {
         }
         // Append the new node at the end of the existing list
         else {
-            printf("appending to end\n");
             struct Node* currNode = adjList[startIndex];
             struct Node* nextNode = newNode();
             nextNode->city = endIndex;
@@ -105,16 +101,12 @@ struct Node** parseGraph(int listSize) {
     // Scan in all information for fptr3
     while(fscanf(fptr3, "%s %s %d", startCity, endCity, &edgeWeight) == 3) {
 
-        printf("Scanned in line for fptr3\n");
         int startIndex = getEnum(startCity);
         int endIndex   = getEnum(endCity);
-        printf("startIndex : %d\n", startIndex);
-        printf("endIndex   : %d\n", endIndex);
 
         // If the start node has never been created before
         if(adjList[startIndex] == NULL) {
 
-            printf("entered list is empty\n");
             struct Node* currNode = newNode();
             struct Node* nextNode = newNode();
             currNode->city = startIndex;
@@ -125,7 +117,6 @@ struct Node** parseGraph(int listSize) {
         }
         // Append the new node at the end of the existing list
         else {
-            printf("appending to end\n");
             struct Node* currNode = adjList[startIndex];
             struct Node* nextNode = newNode();
             nextNode->city = endIndex;
@@ -135,6 +126,17 @@ struct Node** parseGraph(int listSize) {
         }
         startCity[0] = '\0';
         endCity[0]   = '\0';
+    }
+
+    // Since we are using an adjacency list to calculate the
+    // shortest and longest paths, all cities must be in the list,
+    // even cities with no children. 
+    for(int i = 0; i < listSize; ++i) {
+        if(adjList[i] == NULL) {
+            struct Node* currNode = newNode();
+            currNode->city = i;
+            adjList[i] = currNode;
+        }
     }
 
     fclose(fptr1);

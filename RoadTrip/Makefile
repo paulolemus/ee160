@@ -1,9 +1,10 @@
 # EE 160 Team AMERICA Road Trip Final Project Makefile
 
+CFLAGS = -Wall -Wextra -g
 
 all: RoadTrip
 
-RoadTrip: fileIO.o Node.o RoadTrip.c
+RoadTrip: fileIO.o Node.o pathplanning.o RoadTrip.c
 
 pathplanning.o: pathplanning.h
 

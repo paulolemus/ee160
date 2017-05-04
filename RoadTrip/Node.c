@@ -1,7 +1,7 @@
 /* File: Node.c
  * Name: Paulo Lemus
- * Date: 
- * Team:
+ * Date: 5/3/2017
+ * Team: AMERICA
  */
 
 #include <stdlib.h>

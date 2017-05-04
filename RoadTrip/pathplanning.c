@@ -4,6 +4,9 @@
  *  Members: Paulo, Chris, Kevin
  */
 
+#include <stdlib.h>
+#include "pathplanning.h"
+
 /* shortestPath Algorithm:
  *
  * This function finds the shortest path from a start node to an end node.
@@ -17,7 +20,7 @@
  * the current node appends itself to the front of the min path and returns.
  * This happens until the minPath from the start to the end is returned.
  */
-struct Node* shortestPath(struct Node** adjList, int size, enum City start, enum City goal) {
+struct Node* shortestPath(struct Node** adjList, enum City start, enum City goal) {
 
     struct Node* currNode = adjList[start];
 
@@ -53,7 +56,7 @@ struct Node* shortestPath(struct Node** adjList, int size, enum City start, enum
         currNode = adjList[start];
         for(int i = 0; i < childrenCount; ++i) {
             currNode = currNode->next;
-            pathsList[i] = shortestPath(adjList, size, currNode->city, goal);
+            pathsList[i] = shortestPath(adjList, currNode->city, goal);
         }
 
         // This block of code iterates through the list until a non-null
@@ -80,7 +83,7 @@ struct Node* shortestPath(struct Node** adjList, int size, enum City start, enum
         // length of each path to the min path to see if a shorter
         // one exists. If it does, we save the index and min path value
         for(int i = 0; i < childrenCount; ++i) {
-            currSum = 0;
+            currSum  = 0;
             currNode = pathsList[i];
             // If the path is the goal, save index and end loop
             if(currNode && currNode->edge < 0) {
@@ -112,10 +115,102 @@ struct Node* shortestPath(struct Node** adjList, int size, enum City start, enum
             bestPath->edge = adjList[start]->edge;
             bestPath->next = pathsList[shortIndex];
         }
-
         // Clean up and return
         for(int i = 0; i < childrenCount; ++i) {
             if(i != shortIndex) {
+                deleteList(pathsList[i]);
+            }
+        }
+        return bestPath;
+    }
+}
+
+
+struct Node* longestPath(struct Node** adjList, enum City start, enum City goal) {
+
+    struct Node* currNode = adjList[start];
+
+    // Guard against NULL pointer
+    if(currNode == NULL) {
+        return NULL;
+    }
+    // If we have arrived at the destination, return a copy of the destination
+    else if(currNode->city == goal) {
+        struct Node* copyNode = newNode();
+        copyNode->city = currNode->city;
+        return copyNode;
+    }
+    // We need to recursively call this function on all adjacent nodes
+    // from the current, and then compare the lengths of those to find 
+    // the longest path.
+    else {
+        // count up the number of nodes the current node is connected to
+        int childrenCount = 0;
+        currNode = currNode->next;
+        while(currNode) {
+            childrenCount++;
+            currNode = currNode->next;
+        }
+
+        // Guard against no children
+        if(childrenCount < 1) {
+            return NULL;
+        }
+
+        // Create new list to hold all the potential paths to goal from current
+        struct Node* pathsList[childrenCount];
+        for(int i = 0; i < childrenCount; ++i) pathsList[i] = NULL;
+
+        // Save the longest path from each child to the goal in an array
+        currNode = adjList[start];
+        for(int i = 0; i < childrenCount; ++i) {
+            currNode = currNode->next;
+            pathsList[i] = longestPath(adjList, currNode->city, goal);
+        }
+
+
+        // Look at each path in the pathsList and determine
+        // which path has the longest total length from the 
+        // current to the root. That path is the one we want
+        // to move up.
+        int maxIndex = -1, maxSum = -1, currSum;
+        for(int i = 0; i < childrenCount; ++i) {
+            currSum  = 0;
+            currNode = pathsList[i];
+            // If the path is the goal, save index and end loop
+            if(currNode && currNode->edge < 0) {
+                maxIndex = i;
+                i = childrenCount;
+            }
+            // Otherwise, sum the edge weights of list
+            else if(currNode) {
+                while(currNode && currNode->edge >= 0) {
+                    currSum += currNode->edge;
+                    currNode = currNode->next;
+                }
+                if(currSum > maxSum) {
+                    maxSum = currSum;
+                    maxIndex = i;
+                }
+            }
+        }
+
+
+        // With the shortIndex that was found in the above
+        // loop, we either append ourself to the front of the
+        // shortest path from the children paths and return,
+        // or we return null if there are no paths to goal.
+        struct Node* bestPath = NULL;
+        if(maxIndex < 0);
+        else {
+            bestPath = newNode();
+            bestPath->city = adjList[start]->city;
+            bestPath->edge = adjList[start]->edge;
+            bestPath->next = pathsList[shortIndex];
+        }
+        // Clean up and return
+        for(int i = 0; i < childrenCount; ++i) {
+            if(i != maxIndex) {
                 deleteList(pathsList[i]);
             }
         }
