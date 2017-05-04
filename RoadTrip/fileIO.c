@@ -4,12 +4,14 @@
  * Team: AMERICA
  */
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "fileIO.h"
 
-struct Node** parseGraph() {
+struct Node** parseGraph(int* listSize) {
 
     // Ensure that all files can be opened
-    FILE* fptr1, fptr2, fptr3;
+    FILE *fptr1, *fptr2, *fptr3;
     if((fptr1 = fopen(file1, "r")) == NULL) {
         printf("Could not open %s\n", file1);
         exit(1);

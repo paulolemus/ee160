@@ -1,13 +1,15 @@
 # EE 160 Team AMERICA Road Trip Final Project Makefile
 
 
-all:
+all: RoadTrip
 
-RoadTrip: pathplanning.o parser.o RoadTrip.c
+RoadTrip: fileIO.o Node.o RoadTrip.c
 
 pathplanning.o: pathplanning.h
 
-parser.o: parser.h
+fileIO.o: fileIO.h
+
+Node.o: Node.h
 
 # clean targets
 
