@@ -53,43 +53,41 @@ struct Node* longestPath(struct Node** adjList, int listsize, enum City start, e
 {
     /* declare start and potential paths variables */
     struct Node* currNode = adjList[start];
-    struct Node** potPaths[7];
-    struct Node* bestPath = adjList[start];
+    int childrencount = 0;
 
     /* guard list */
-    if(currNode->city == goal)
-        return currNode;
-    if(currNode == NULL)
-        return currNode;
+    if(currNode->city == goal) //if currently at destination
+    {
+        struct Node* copyNode = newNode();
+        copyNode->city = currNode->city;
+        return copyNode; //return a copy of itself
+    }
+    if(currNode == NULL) //if at a NULL pointer
+        return NULL;
 
-    /* initialize potential paths */
-    for(int i = 0; i < 7; i++)
-        potPaths[i] = NULL;
-
-    /* get potential paths */
+    /* get children count */
     while(currNode->next != NULL)
     {
         currNode = currNode->next;
-        potPaths[getEnum(currNode->city)] = 
-            longestPath(adjList, listsize, getEnum(currNode->city), goal);
+        childrencount++;
     }
+    currNode = adjList[start]; //reset back to start
 
-    /* path computation */
-    for(int i = 0; i < 7; i++)
+    /* allocate memory for children list */
+    struct Node** pathslist = malloc(childrencount * sizeof(struct Node*));
+    /* saves path computation for each child */
+    for(int i = 0; i < childrencount; i++)
     {
-        int sum = 0;
-        while(currNode->city != NULL)
-        {
-            potPaths[i] += currNode->edge;
             currNode = currNode->next;
-        }
+            pathslist[i] = longestPath(adjList, listsize, currNode->city, goal);
     }
 
     /* finds longest path index */
-    for(int i = 0; i < 7; i++)
+    struct Node* bestPath = adjList[start];
+    for(int i = 0; i < childrencount; i++)
     {
-        if(bestPath->edge < potPaths[i])
-            bestPath = potPaths[i];
+        if(pathlist[i]->edge > bestPath->edge)
+            bestPath = pathlist[i];
     }
 
     /* return longest path index */
