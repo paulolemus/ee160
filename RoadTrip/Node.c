@@ -41,3 +41,17 @@ enum City getEnum(const char* cityStr) {
     else if(strcmp(cityStr, "new_york")       == 0) return NEW_YORK;
     else                                            return CITY_ERROR;
 }
+
+char* getCity(enum City city) {
+    switch(city) {
+        case SAN_FRAN:     return "san_francisco";
+        case LAS_VEGAS:    return "las_vegas";
+        case TUSCON:       return "tuscon";
+        case SALT_LAKE:    return "salt_lake_city";
+        case CHICAGO:      return "chicago";
+        case NASHVILLE:    return "nashville";
+        case INDIANAPOLIS: return "indianapolis";
+        case NEW_YORK:     return "new_york";
+        default:           return "error";
+    }
+}

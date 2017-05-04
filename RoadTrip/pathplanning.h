@@ -19,11 +19,11 @@ static const char* GOAL  = "new_york";
 /*
  *
  */
-struct Node* shortestPath(struct Node**, int listsize, enum City start, enum City goal);
+struct Node* shortestPath(struct Node** adjList, int size, enum City start, enum City goal);
 /*
  *
  */
-struct Node* longestPath(struct Node**, int listsize, enum City start, enum City goal);
+struct Node* longestPath(struct Node** adjList, int size, enum City start, enum City goal);
 /*  Given:  Node**, size of list, san_francisco, & new_york
  *  Returns: pointer to a Node with longestPath
  */

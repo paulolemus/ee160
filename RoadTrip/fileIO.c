@@ -1,5 +1,5 @@
 /* File: fileIO.c
- * Name:
+ * Name: Paulo Lemus
  * Date: 5/3/2017
  * Team: AMERICA
  */
@@ -24,15 +24,10 @@ struct Node** parseGraph(int listSize) {
         printf("Could not open %s\n", file3);
         exit(1);
     }
-    struct Node* file1;
-    struct Node* file2;
-    struct Node* file3;
 
-    printf("Opened files okay\n");
     // Create the list of adjacency lists, initialize each index to null
     struct Node** adjList = malloc(listSize * sizeof(struct Node*));
     for(unsigned int i = 0; i < listSize; ++i) adjList[i] = NULL;
-    printf("Allocated adjList\n");
 
     char startCity[20];
     char endCity[20];

@@ -12,15 +12,15 @@
 #define AMERICA_NODE_H_
 
 enum City {
-    CITY_ERROR = -1,
-    SAN_FRAN = 0,
-    LAS_VEGAS = 1,
-    TUSCON = 2,
-    SALT_LAKE = 3,
-    CHICAGO = 4,
-    NASHVILLE = 5,
+    CITY_ERROR   = -1,
+    SAN_FRAN     = 0,
+    LAS_VEGAS    = 1,
+    TUSCON       = 2,
+    SALT_LAKE    = 3,
+    CHICAGO      = 4,
+    NASHVILLE    = 5,
     INDIANAPOLIS = 6,
-    NEW_YORK = 7
+    NEW_YORK     = 7
 };
 
 struct Node {
@@ -35,5 +35,6 @@ void deleteList(struct Node* nodePtr);
 
 // Enum functions
 enum City getEnum(const char* cityStr);
+char*     getCity(enum City city);
 
 #endif // AMERICA_NODE_H_
