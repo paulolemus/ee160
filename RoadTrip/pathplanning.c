@@ -42,9 +42,38 @@ struct Node* shortestPath(struct Node** adjList, int size, enum City start, enum
             pathsList[i] = shortestPath(adjList, size, currNode->city, goal);
         }
 
-        // Find the shortest path of the children paths
+        // Find the shortest path of the children paths and save the index
+        int shortIndex = -1, minSum, currSum;
         for(int i = 0; i < childrenCount; ++i) {
-            
+
+            currNode = pathsList[i];
+            // If the path is the goal
+            if(currNode && currNode->edge < 0) {
+
+            }
+            else if(currNode) {
+                
+            }
+        }
+
+        // Now the shortest path is found, return it
+        // If there is no child path
+        if(shortIndex < 0) {
+            return NULL;
+        }
+        // Append ourself to the front of the shortest path and return it.
+        else {
+            struct Node* copyNode = newNode();
+            copyNode->city = adjList[start]->city;
+            copyNode->edge = adjList[start]->edge;
+            copyNode->next = pathsList[shortIndex];
+
+            for(int i = 0; i < childrenCount; ++i) {
+                if(i != shortIndex) {
+                    deleteList(pathsList[i]);
+                }
+            }
+            return copyNode;
         }
     }
 }
@@ -90,6 +119,6 @@ struct Node* longestPath(struct Node** adjList, int listsize, enum City start, e
             bestPath = pathlist[i];
     }
 
-    /* return longest path index */
     return bestPath;
 }
+
