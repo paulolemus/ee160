@@ -19,12 +19,19 @@
  * then they select the minimal path of the options. When a min path is found, 
  * the current node appends itself to the front of the min path and returns.
  * This happens until the minPath from the start to the end is returned.
+ *
+ * Steps:
+ * 1. If start == goal, return a pointer to a list with myself. (optimal path)
+ *    Otherwise:
+ * 2. recursively find the shortest path of all my adjacent nodes to goal and save in array.
+ * 3. Select the the child who has the shortest path to goal of all children.
+ * 4. Append myself to the front of the shortest path list then return.
  */
 struct Node* shortestPath(struct Node** adjList, enum City start, enum City goal) {
 
     struct Node* currNode = adjList[start];
 
-    // Guard against NULL pointer
+    // Guard
     if(currNode == NULL) {
         return NULL;
     }
@@ -72,6 +79,11 @@ struct Node* shortestPath(struct Node** adjList, enum City start, enum City goal
             }
             else {
                 minSum = 0;
+                struct Node* thisList = adjList[start];
+                while(thisList->next->city != currNode->city) {
+                    thisList = thisList->next;
+                }
+                minSum += thisList->edge;
                 while(currNode && currNode->edge >= 0) {
                     minSum  += currNode->edge;
                     currNode = currNode->next;
@@ -92,6 +104,11 @@ struct Node* shortestPath(struct Node** adjList, enum City start, enum City goal
             }
             // Otherwise, sum the edge weights of list
             else if(currNode) {
+                struct Node* thisList = adjList[start];
+                while(thisList->next->city != currNode->city) {
+                    thisList = thisList->next;
+                }
+                currSum += thisList->edge;
                 while(currNode && currNode->edge >= 0) {
                     currSum += currNode->edge;
                     currNode = currNode->next;
@@ -128,6 +145,8 @@ struct Node* shortestPath(struct Node** adjList, enum City start, enum City goal
 }
 
 
+// This works exactly the same as the above function, however when comparing
+// paths it saves the longest instead of the shortest.
 struct Node* longestPath(struct Node** adjList, enum City start, enum City goal) {
 
     struct Node* currNode = adjList[start];
@@ -186,6 +205,11 @@ struct Node* longestPath(struct Node** adjList, enum City start, enum City goal)
             }
             // Otherwise, sum the edge weights of list
             else if(currNode) {
+                struct Node* thisList = adjList[start];
+                while(thisList->next->city != currNode->city) {
+                    thisList = thisList->next;
+                }
+                currSum += thisList->edge;
                 while(currNode && currNode->edge >= 0) {
                     currSum += currNode->edge;
                     currNode = currNode->next;

@@ -11,6 +11,7 @@
 #ifndef AMERICA_NODE_H_
 #define AMERICA_NODE_H_
 
+// We can only use cities from this enum.
 enum City {
     CITY_ERROR   = -1,
     SAN_FRAN     = 0,
@@ -23,6 +24,7 @@ enum City {
     NEW_YORK     = 7
 };
 
+// A node is used to model a city and its connections
 struct Node {
     enum City    city;
     int          edge;
@@ -31,7 +33,7 @@ struct Node {
 
 // Node functions
 struct Node* newNode();
-void deleteList(struct Node* nodePtr);
+void         deleteList(struct Node* nodePtr);
 
 // Enum functions
 enum City getEnum(const char* cityStr);

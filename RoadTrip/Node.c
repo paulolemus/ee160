@@ -8,6 +8,8 @@
 #include <string.h>
 #include "Node.h"
 
+// Using this function when creating nodes ensures
+// that we do not forget to initialize any of its fields
 struct Node* newNode() {
     struct Node* nodePtr = malloc(sizeof(struct Node));
     nodePtr->city = CITY_ERROR;
@@ -16,6 +18,11 @@ struct Node* newNode() {
     return nodePtr;
 }
 
+// Delete an entire linked list.
+// This saves a pointer to the next node, then
+// deletes the current node if it is not NULL.
+// This is done in a loop, so it continues to delete nodes
+// until the next pointer becomes NULL, indicating end of list.
 void deleteList(struct Node* nodePtr) {
 
     struct Node* nextPtr;
@@ -28,6 +35,9 @@ void deleteList(struct Node* nodePtr) {
         } while(nodePtr != NULL);
     }
 }
+
+// Here we have two functions used for converting a enum
+// to its corresponding string and vice versa
 
 enum City getEnum(const char* cityStr) {
 

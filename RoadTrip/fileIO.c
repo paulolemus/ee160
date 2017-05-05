@@ -8,10 +8,34 @@
 #include <stdio.h>
 #include "fileIO.h"
 
+// You can change these if you wish to use different data sets.
 const char* file1 = "leg1.txt";
 const char* file2 = "leg2.txt";
 const char* file3 = "leg3.txt";
 
+
+/* What it does:
+ * This function parses in all the data from the files into a
+ * directed adjacency list. We are assuming it is directed because
+ * it simplifies things for later. We also decided to go with a list
+ * because it would be good to have practice with pointers and lists,
+ * and also because adjacency matrix would have lots of empty slots and
+ * also be slightly less intuative to work with.
+ *
+ * Algorithm:
+ * 1. Open all the files to assert they exist. If any file does not exist, exit.
+ * 2. Initialize an array of lists of size |V|, where V is the number of unique
+ *    vertices.
+ * 3. Read in data from each file: While reading do the following:
+ *      a. Check if the city exists in an enum. We can only use cities
+ *         that we have in the enum.
+ *      b. Save the enum, and check if that city slot in the array is null.
+ *         If it is null, create a new node and the city it points to.
+ *         If the city already exits, then append the destination city to the end
+ *         of its list.
+ * 4. Go through the list and instantiate any null slots with its corresponding city node.
+ * 5. Close all files and return a pointer to the start of the list.
+ */
 struct Node** parseGraph(int listSize) {
 
     // Ensure that all files can be opened
