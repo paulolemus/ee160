@@ -16,6 +16,7 @@ If a function's start is its goal, then it returns a pointer to a copy of that n
 The program basically splits the optimal path problem into many smaller optimal path problems, then joins them together.
 
 The program should work with any number of edges and with any start and goal nodes. However, we are limited to only choosing from the 8 cities, as we use enums to identify them.
+The program also will not work if there are any cycles in the graph unfortunately.
 
 # Files
 
